@@ -181,7 +181,8 @@
   <a href="#colour">Colour</a>
   <a href="#radius">Radius</a>
   <a href="#shadow">Shadows</a>
-  <a href="#pills">Pills &amp; badges</a>
+  <a href="#pills">Pills &amp; status</a>
+  <a href="#tags">Category tags</a>
 
   <div class="nav-section">Export</div>
   <a href="#css-output">CSS output</a>
@@ -198,6 +199,15 @@
       <span class="badge badge-blue">Figma → CSS</span>
       <span class="badge badge-orange">5 brands</span>
       <span class="badge badge-green">Expanded · Compact</span>
+      <span class="badge" style="background:rgba(26,122,26,0.08);color:#1a6a1a">&#10003; Component ready</span>
+    </div>
+  </div>
+
+  <div style="background:#f0f7f0;border:1px solid #c3e0c3;border-radius:8px;padding:16px 20px;margin-bottom:40px;display:flex;gap:12px;align-items:flex-start">
+    <span style="font-size:18px;flex-shrink:0">&#10003;</span>
+    <div>
+      <div style="font-size:13px;font-weight:700;color:#1a5a1a;margin-bottom:4px">Foundation complete — ready to build components</div>
+      <div style="font-size:12px;color:#2a6a2a;line-height:1.7">All token collections are locked and scoped. Start with <strong>Button</strong> → <strong>Badge/Tag</strong> → <strong>Card</strong>. Use <code style="font-family:var(--mono);font-size:11px;background:rgba(0,0,0,0.06);padding:1px 5px;border-radius:3px">Semantic/Mapped</code> for colour and radius, <code style="font-family:var(--mono);font-size:11px;background:rgba(0,0,0,0.06);padding:1px 5px;border-radius:3px">Semantic/Layout</code> for spacing and font sizes. No hardcoded values in components.</div>
     </div>
   </div>
 
@@ -383,24 +393,52 @@
   <section id="pills" class="section">
     <div class="section-header">
       <span class="section-num">06</span>
-      <span class="section-title">Pills &amp; badges</span>
+      <span class="section-title">Pills &amp; status</span>
     </div>
-    <p class="section-desc">Semantic/Mapped · shared across all brands · use these for product card labels, status indicators.</p>
+    <p class="section-desc">Semantic/Mapped · shared across all brands · status indicators, form feedback, system states.</p>
     <div class="pill-grid">
-      <span class="pill" style="background:rgba(175,18,29,0.12);color:#ef4444;border-color:rgba(175,18,29,0.3)">🔥 Hot deal</span>
-      <span class="pill" style="background:rgba(245,192,14,0.12);color:#f5c00e;border-color:rgba(245,192,14,0.3)">⭐ Best seller</span>
-      <span class="pill" style="background:rgba(46,160,46,0.12);color:#4ade80;border-color:rgba(46,160,46,0.3)">✓ Meals included</span>
-      <span class="pill" style="background:rgba(42,147,213,0.12);color:#60a5fa;border-color:rgba(42,147,213,0.3)">🚌 Hotel pickup</span>
-      <span class="pill" style="background:rgba(150,150,150,0.12);color:#9ca3af;border-color:rgba(150,150,150,0.3)">Neutral</span>
+      <span class="pill" style="background:#fce8e8;color:#dc2020;border-color:#f5a0a0">Sale</span>
+      <span class="pill" style="background:#e0f7e0;color:#1a7a1a;border-color:#90d890">Success</span>
+      <span class="pill" style="background:#fff8e0;color:#a07000;border-color:#f0d060">Warning</span>
+      <span class="pill" style="background:#e0eeff;color:#0055aa;border-color:#90b8f0">Info</span>
+      <span class="pill" style="background:#f5f5f5;color:#555555;border-color:#cccccc">Neutral</span>
     </div>
     <table class="token-table">
-      <thead><tr><th>Token group</th><th>-bg</th><th>-text</th><th>-border</th></tr></thead>
+      <thead><tr><th>Token group</th><th>CSS — bg</th><th>CSS — text</th><th>CSS — border</th><th>Use</th></tr></thead>
       <tbody>
-        <tr><td class="token-name">pill/sale</td><td class="token-val" style="font-size:11px">red-light</td><td class="token-val" style="font-size:11px">global/red</td><td class="token-val" style="font-size:11px">global/red</td></tr>
-        <tr><td class="token-name">pill/success</td><td class="token-val" style="font-size:11px">green-light</td><td class="token-val" style="font-size:11px">global/green</td><td class="token-val" style="font-size:11px">global/green</td></tr>
-        <tr><td class="token-name">pill/warning</td><td class="token-val" style="font-size:11px">yellow-light</td><td class="token-val" style="font-size:11px">global/yellow</td><td class="token-val" style="font-size:11px">global/yellow</td></tr>
-        <tr><td class="token-name">pill/info</td><td class="token-val" style="font-size:11px">blue-light</td><td class="token-val" style="font-size:11px">global/blue</td><td class="token-val" style="font-size:11px">global/blue</td></tr>
-        <tr><td class="token-name">pill/neutral</td><td class="token-val" style="font-size:11px">neutral-100</td><td class="token-val" style="font-size:11px">neutral-700</td><td class="token-val" style="font-size:11px">neutral-300</td></tr>
+        <tr><td class="token-name">pill/sale</td><td class="token-css" style="font-size:11px">--pill-sale-bg</td><td class="token-css" style="font-size:11px">--pill-sale-text</td><td class="token-css" style="font-size:11px">--pill-sale-border</td><td class="token-desc">Discounted pricing</td></tr>
+        <tr><td class="token-name">pill/success</td><td class="token-css" style="font-size:11px">--pill-success-bg</td><td class="token-css" style="font-size:11px">--pill-success-text</td><td class="token-css" style="font-size:11px">--pill-success-border</td><td class="token-desc">Confirmed, available</td></tr>
+        <tr><td class="token-name">pill/warning</td><td class="token-css" style="font-size:11px">--pill-warning-bg</td><td class="token-css" style="font-size:11px">--pill-warning-text</td><td class="token-css" style="font-size:11px">--pill-warning-border</td><td class="token-desc">Limited availability</td></tr>
+        <tr><td class="token-name">pill/info</td><td class="token-css" style="font-size:11px">--pill-info-bg</td><td class="token-css" style="font-size:11px">--pill-info-text</td><td class="token-css" style="font-size:11px">--pill-info-border</td><td class="token-desc">Neutral information</td></tr>
+        <tr><td class="token-name">pill/neutral</td><td class="token-css" style="font-size:11px">--pill-neutral-bg</td><td class="token-css" style="font-size:11px">--pill-neutral-text</td><td class="token-css" style="font-size:11px">--pill-neutral-border</td><td class="token-desc">Default label</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ── TAGS ── -->
+  <section id="tags" class="section">
+    <div class="section-header">
+      <span class="section-num">07</span>
+      <span class="section-title">Category tags</span>
+    </div>
+    <p class="section-desc">Semantic/Mapped · shared across all brands · product card feature labels. Each tag has a distinct colour to aid scannability.</p>
+    <div class="pill-grid" style="margin-bottom:20px">
+      <span class="pill" style="background:#fce8e8;color:#c01010;border-color:#f0a0a0">🔥 Hot deal</span>
+      <span class="pill" style="background:#fff8e0;color:#8a6000;border-color:#e8c840">⭐ Best seller</span>
+      <span class="pill" style="background:#e0f7e0;color:#1a6a1a;border-color:#90d890">🍽 Meal included</span>
+      <span class="pill" style="background:#e0eeff;color:#0044aa;border-color:#90b0f0">🚌 Hotel pickup</span>
+      <span class="pill" style="background:#dcf6f3;color:#0a7060;border-color:#80d0c8">🌿 Eco friendly</span>
+      <span class="pill" style="background:#eee2fe;color:#6020b0;border-color:#c090e8">✨ New</span>
+    </div>
+    <table class="token-table">
+      <thead><tr><th>Token group</th><th>CSS — bg</th><th>CSS — text</th><th>Colour</th><th>Use case</th></tr></thead>
+      <tbody>
+        <tr><td class="token-name">tag/hot-deal</td><td class="token-css" style="font-size:11px">--tag-hot-deal-bg</td><td class="token-css" style="font-size:11px">--tag-hot-deal-text</td><td><div style="display:flex;align-items:center;gap:6px;padding:10px 12px"><div style="width:16px;height:16px;border-radius:3px;background:#fce8e8;border:1px solid #f0a0a0"></div><span style="font-family:var(--mono);font-size:11px;color:#1a7a1a">red</span></div></td><td class="token-desc">Urgency, sale energy</td></tr>
+        <tr><td class="token-name">tag/best-seller</td><td class="token-css" style="font-size:11px">--tag-best-seller-bg</td><td class="token-css" style="font-size:11px">--tag-best-seller-text</td><td><div style="display:flex;align-items:center;gap:6px;padding:10px 12px"><div style="width:16px;height:16px;border-radius:3px;background:#fff8e0;border:1px solid #e8c840"></div><span style="font-family:var(--mono);font-size:11px;color:#1a7a1a">yellow</span></div></td><td class="token-desc">Popular, premium</td></tr>
+        <tr><td class="token-name">tag/meal-included</td><td class="token-css" style="font-size:11px">--tag-meal-included-bg</td><td class="token-css" style="font-size:11px">--tag-meal-included-text</td><td><div style="display:flex;align-items:center;gap:6px;padding:10px 12px"><div style="width:16px;height:16px;border-radius:3px;background:#e0f7e0;border:1px solid #90d890"></div><span style="font-family:var(--mono);font-size:11px;color:#1a7a1a">green</span></div></td><td class="token-desc">Included benefit</td></tr>
+        <tr><td class="token-name">tag/hotel-pickup</td><td class="token-css" style="font-size:11px">--tag-hotel-pickup-bg</td><td class="token-css" style="font-size:11px">--tag-hotel-pickup-text</td><td><div style="display:flex;align-items:center;gap:6px;padding:10px 12px"><div style="width:16px;height:16px;border-radius:3px;background:#e0eeff;border:1px solid #90b0f0"></div><span style="font-family:var(--mono);font-size:11px;color:#1a7a1a">blue</span></div></td><td class="token-desc">Logistical info</td></tr>
+        <tr><td class="token-name">tag/eco-friendly</td><td class="token-css" style="font-size:11px">--tag-eco-friendly-bg</td><td class="token-css" style="font-size:11px">--tag-eco-friendly-text</td><td><div style="display:flex;align-items:center;gap:6px;padding:10px 12px"><div style="width:16px;height:16px;border-radius:3px;background:#dcf6f3;border:1px solid #80d0c8"></div><span style="font-family:var(--mono);font-size:11px;color:#1a7a1a">teal</span></div></td><td class="token-desc">Sustainability</td></tr>
+        <tr><td class="token-name">tag/new</td><td class="token-css" style="font-size:11px">--tag-new-bg</td><td class="token-css" style="font-size:11px">--tag-new-text</td><td><div style="display:flex;align-items:center;gap:6px;padding:10px 12px"><div style="width:16px;height:16px;border-radius:3px;background:#eee2fe;border:1px solid #c090e8"></div><span style="font-family:var(--mono);font-size:11px;color:#1a7a1a">purple</span></div></td><td class="token-desc">New listing</td></tr>
       </tbody>
     </table>
   </section>
@@ -408,7 +446,7 @@
   <!-- ── CSS OUTPUT ── -->
   <section id="css-output" class="section">
     <div class="section-header">
-      <span class="section-num">07</span>
+      <span class="section-num">08</span>
       <span class="section-title">CSS output preview</span>
     </div>
     <p class="section-desc">Illustrative output from Token Studio + Style Dictionary. Final format to be agreed before implementation.</p>
@@ -433,18 +471,19 @@
   <!-- ── NEXT STEPS ── -->
   <section id="next-steps" class="section">
     <div class="section-header">
-      <span class="section-num">08</span>
+      <span class="section-num">09</span>
       <span class="section-title">Next steps</span>
     </div>
     <p class="section-desc">Roadmap to Token Studio integration.</p>
     <table class="token-table">
       <thead><tr><th>#</th><th>Step</th><th>Detail</th></tr></thead>
       <tbody>
-        <tr><td class="token-name" style="color:var(--text-dim)">1</td><td class="token-desc" style="font-weight:600;color:var(--text)">Confirm naming</td><td class="token-desc">Agree final CSS custom property naming with dev. Names above are proposals — rename before Token Studio setup.</td></tr>
-        <tr><td class="token-name" style="color:var(--text-dim)">2</td><td class="token-desc" style="font-weight:600;color:var(--text)">Build component library</td><td class="token-desc">Complete core components in Figma using Semantic tokens only. No hardcoded values in components.</td></tr>
-        <tr><td class="token-name" style="color:var(--text-dim)">3</td><td class="token-desc" style="font-weight:600;color:var(--text)">Install Token Studio</td><td class="token-desc">Connect Figma file to storefront-common-ui GitHub repo. Configure Style Dictionary output.</td></tr>
-        <tr><td class="token-name" style="color:var(--text-dim)">4</td><td class="token-desc" style="font-weight:600;color:var(--text)">PR workflow</td><td class="token-desc">Token changes in Figma → Token Studio exports JSON → PR raised → dev reviews → merged. No auto-deploy.</td></tr>
-        <tr><td class="token-name" style="color:var(--text-dim)">5</td><td class="token-desc" style="font-weight:600;color:var(--text)">Phase 2 — intent aliases</td><td class="token-desc">Once scale is adopted: <code style="font-family:var(--mono);font-size:11px;color:#0055aa;background:#f0f0f2;padding:1px 5px;border-radius:3px">--space-inset: var(--spacing-m)</code>. Second pass, not blocking adoption.</td></tr>
+        <tr><td style="padding:10px 12px;font-family:var(--mono);font-size:12px;color:#1a7a1a">&#10003;</td><td class="token-desc" style="font-weight:600;color:#1a7a1a">Foundation complete</td><td class="token-desc">All 7 collections locked. Primitives, Semantic/Color, Radius, Typography, Spacing, Mapped, Layout all wired and scoped correctly.</td></tr>
+        <tr><td style="padding:10px 12px;font-family:var(--mono);font-size:12px;color:#0055aa">&#9654;</td><td class="token-desc" style="font-weight:600;color:var(--text)">Build component library</td><td class="token-desc">Start with Button → Badge/Tag → Card. Use Semantic/Mapped for colour + radius, Semantic/Layout for spacing + font sizes. No hardcoded values in components.</td></tr>
+        <tr><td class="token-name" style="color:var(--text-dim)">3</td><td class="token-desc" style="font-weight:600;color:var(--text)">Confirm CSS naming</td><td class="token-desc">Agree final CSS custom property naming with dev before Token Studio setup. Names in this doc are proposals.</td></tr>
+        <tr><td class="token-name" style="color:var(--text-dim)">4</td><td class="token-desc" style="font-weight:600;color:var(--text)">GitHub Pages</td><td class="token-desc">Add this file to /docs folder in storefront-common-ui repo. Settings → Pages → Deploy from /docs. Live at github.io/storefront-common-ui.</td></tr>
+        <tr><td class="token-name" style="color:var(--text-dim)">5</td><td class="token-desc" style="font-weight:600;color:var(--text)">Install Token Studio</td><td class="token-desc">After ~10 core components are built and stable. Connect Figma → GitHub → Style Dictionary → CSS. PR workflow — no auto-deploy to production.</td></tr>
+        <tr><td class="token-name" style="color:var(--text-dim)">6</td><td class="token-desc" style="font-weight:600;color:var(--text)">Phase 2 — intent aliases</td><td class="token-desc">Once scale is adopted: <code style="font-family:var(--mono);font-size:11px;color:#0055aa;background:#f0f0f2;padding:1px 5px;border-radius:3px">--space-inset: var(--spacing-m)</code>. Second pass, not blocking adoption.</td></tr>
       </tbody>
     </table>
   </section>
