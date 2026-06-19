@@ -5,164 +5,133 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BRG Design System · Token Reference</title>
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  :root {
-    --bg: #ffffff;
-    --surface: #f8f8f9;
-    --surface-2: #f0f0f2;
-    --border: #e0e0e4;
-    --border-hover: #b0b0b8;
-    --text: #0d0d10;
-    --text-muted: #55555f;
-    --text-dim: #9999a8;
-    --accent: #0066cc;
-    --accent-2: #cc4400;
-    --green: #1a7a1a;
-    --mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
-    --sans: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
-  }
-
-  body { background: var(--bg); color: var(--text); font-family: var(--sans); font-size: 14px; line-height: 1.6; min-height: 100vh; }
-
-  /* ── Layout ── */
-  .shell { display: grid; grid-template-columns: 220px 1fr; min-height: 100vh; }
-
-  /* ── Sidebar ── */
-  nav { position: sticky; top: 0; height: 100vh; overflow-y: auto; background: var(--surface); border-right: 1px solid var(--border); padding: 24px 0; display: flex; flex-direction: column; gap: 0; }
-  .nav-logo { padding: 0 20px 24px; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
-  .nav-logo-mark { display: flex; align-items: center; gap: 8px; }
-  .nav-logo-mark span:first-child { width: 28px; height: 28px; background: #0066cc; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; color: #fff; flex-shrink: 0; }
-  .nav-logo-mark span:last-child { font-size: 13px; font-weight: 600; color: var(--text); letter-spacing: -0.3px; }
-  .nav-subtitle { font-size: 11px; color: var(--text-muted); margin-top: 4px; padding-left: 36px; }
-
-  .nav-section { padding: 6px 20px 4px; font-size: 10px; font-weight: 700; color: var(--text-dim); letter-spacing: 1.2px; text-transform: uppercase; }
-  nav a { display: block; padding: 7px 20px; font-size: 13px; color: var(--text-muted); text-decoration: none; border-left: 2px solid transparent; transition: all 0.15s; }
-  nav a:hover { color: var(--text); background: var(--surface-2); }
-  nav a.active { color: var(--accent); border-left-color: var(--accent); background: rgba(0,102,204,0.06); }
-
-  /* ── Main ── */
-  main { padding: 48px 48px 96px; max-width: 1100px; }
-
-  /* ── Header ── */
-  .page-header { margin-bottom: 56px; padding-bottom: 32px; border-bottom: 1px solid var(--border); }
-  .page-header h1 { font-size: 28px; font-weight: 700; letter-spacing: -0.5px; color: var(--text); }
-  .page-header p { margin-top: 8px; color: var(--text-muted); font-size: 14px; max-width: 600px; line-height: 1.7; }
-  .badge-row { display: flex; gap: 8px; margin-top: 16px; flex-wrap: wrap; }
-  .badge { padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; letter-spacing: 0.3px; }
-  .badge-blue { background: rgba(0,102,204,0.08); color: #0055aa; }
-  .badge-orange { background: rgba(204,68,0,0.08); color: #aa3300; }
-  .badge-green { background: rgba(26,122,26,0.08); color: #1a6a1a; }
-
-  /* ── Sections ── */
-  .section { margin-bottom: 64px; }
-  .section-header { display: flex; align-items: baseline; gap: 12px; margin-bottom: 4px; }
-  .section-num { font-family: var(--mono); font-size: 11px; color: var(--text-dim); font-weight: 600; }
-  .section-title { font-size: 18px; font-weight: 700; color: var(--text); letter-spacing: -0.3px; }
-  .section-desc { font-size: 13px; color: var(--text-muted); margin-bottom: 20px; margin-top: 4px; }
-
-  /* ── Brand switcher ── */
-  .brand-bar { display: flex; gap: 4px; margin-bottom: 16px; flex-wrap: wrap; }
-  .brand-btn { padding: 5px 14px; border-radius: 6px; border: 1px solid var(--border); background: transparent; color: var(--text-muted); font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.15s; font-family: var(--sans); }
-  .brand-btn:hover { border-color: var(--border-hover); color: var(--text); }
-  .brand-btn.active { border-color: var(--accent); color: var(--accent); background: rgba(0,102,204,0.06); }
-  .brand-btn[data-brand="exoz"].active { border-color: #b07800; color: #b07800; background: rgba(176,120,0,0.06); }
-  .brand-btn[data-brand="rb"].active { border-color: #cc2010; color: #cc2010; background: rgba(204,32,16,0.06); }
-  .brand-btn[data-brand="la"].active { border-color: #cc2d00; color: #cc2d00; background: rgba(204,45,0,0.06); }
-  .brand-btn[data-brand="base"].active { border-color: #444; color: #222; background: rgba(0,0,0,0.04); }
-
-  /* ── Breakpoint toggle ── */
-  .bp-toggle { display: flex; gap: 0; margin-bottom: 16px; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; width: fit-content; }
-  .bp-btn { padding: 6px 16px; background: transparent; border: none; color: var(--text-muted); font-size: 12px; font-weight: 600; cursor: pointer; font-family: var(--sans); transition: all 0.15s; }
-  .bp-btn.active { background: var(--surface-2); color: var(--accent); }
-  /* ── Token table ── */
-  .token-table { width: 100%; border-collapse: collapse; }
-  .token-table th { text-align: left; padding: 8px 12px; font-size: 10px; font-weight: 700; color: var(--text-dim); letter-spacing: 1px; text-transform: uppercase; border-bottom: 1px solid var(--border); }
-  .token-table td { padding: 0; border-bottom: 1px solid var(--border); vertical-align: middle; }
-  .token-table tr:last-child td { border-bottom: none; }
-  .token-table tr:hover td { background: rgba(255,255,255,0.02); }
-
-  .token-name { font-family: var(--mono); font-size: 12px; color: #0055aa; padding: 10px 12px; white-space: nowrap; }
-  .token-css  { font-family: var(--mono); font-size: 12px; color: #7700cc; padding: 10px 12px; white-space: nowrap; }
-  .token-val  { font-family: var(--mono); font-size: 12px; color: #1a7a1a; padding: 10px 12px; }
-  .token-desc { font-size: 12px; color: var(--text-muted); padding: 10px 12px; }
-
-  .copy-btn { background: none; border: 1px solid var(--border); border-radius: 4px; color: var(--text-dim); font-size: 10px; font-family: var(--mono); padding: 2px 6px; cursor: pointer; transition: all 0.15s; margin-left: 6px; vertical-align: middle; }
-  .copy-btn:hover { border-color: var(--border-hover); color: var(--text-muted); }
-  .copy-btn.copied { border-color: #1a7a1a; color: #1a7a1a; }
-
-  /* ── Colour swatch ── */
-  .swatch-row { display: flex; align-items: center; gap: 10px; padding: 10px 12px; }
-  .swatch { width: 24px; height: 24px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.1); flex-shrink: 0; }
-  .swatch-hex { font-family: var(--mono); font-size: 12px; color: #1a7a1a; }
-
-  /* ── Spacing visual ── */
-  .spacing-bar { display: inline-flex; align-items: center; gap: 8px; }
-  .spacing-vis { height: 8px; background: rgba(0,102,204,0.2); border-radius: 2px; transition: width 0.3s ease; }
-  .spacing-num { font-family: var(--mono); font-size: 12px; color: #1a7a1a; min-width: 36px; }
-
-  /* ── CSS preview block ── */
-  .css-block { background: #f8f8f9; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-top: 20px; }
-  .css-block-header { display: flex; align-items: center; justify-content: space-between; padding: 10px 16px; border-bottom: 1px solid var(--border); background: #f0f0f2; }
-  .css-block-label { font-size: 11px; font-weight: 600; color: var(--text-muted); font-family: var(--mono); letter-spacing: 0.5px; }
-  .css-copy-all { background: none; border: 1px solid var(--border); border-radius: 4px; color: var(--text-muted); font-size: 11px; padding: 3px 10px; cursor: pointer; font-family: var(--sans); transition: all 0.15s; }
-  .css-copy-all:hover { border-color: var(--border-hover); color: var(--text); }
-  .css-copy-all.copied { border-color: #1a7a1a; color: #1a7a1a; }
-  pre { padding: 20px; font-family: var(--mono); font-size: 12px; line-height: 1.8; overflow-x: auto; color: var(--text); }
-  .kw { color: #aa00aa; }
-  .sel { color: #7700cc; }
-  .prop { color: #0055aa; }
-  .val { color: #1a7a1a; }
-  .cmt { color: #9999a8; }
-
-  /* ── Typography preview ── */
-  .type-preview-row { padding: 14px 12px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 16px; }
-  .type-preview-row:last-child { border-bottom: none; }
-  .type-sample { color: var(--text); transition: font-size 0.3s ease, line-height 0.3s ease; }
-  .type-meta { margin-left: auto; display: flex; gap: 24px; flex-shrink: 0; }
-  .type-meta-item { text-align: right; }
-  .type-meta-label { font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.8px; }
-  .type-meta-val { font-family: var(--mono); font-size: 12px; color: var(--green); }
-
-  /* ── Radius visual ── */
-  .radius-grid { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 4px; }
-  .radius-item { display: flex; flex-direction: column; align-items: center; gap: 8px; }
-  .radius-box { width: 48px; height: 48px; background: #e8e8f0; border: 1px solid var(--border); transition: border-radius 0.3s; }
-  .radius-label { font-family: var(--mono); font-size: 11px; color: var(--text-muted); text-align: center; }
-
-  /* ── Shadow preview ── */
-  .shadow-preview { padding: 24px; background: #f0f0f2; border-radius: 8px; margin-top: 4px; display: flex; gap: 24px; flex-wrap: wrap; }
-  .shadow-item { display: flex; flex-direction: column; gap: 10px; align-items: center; }
-  .shadow-box { width: 80px; height: 56px; background: #ffffff; border-radius: 8px; }
-  .shadow-name { font-family: var(--mono); font-size: 11px; color: var(--text-muted); }
-
-  /* ── Pill preview ── */
-  .pill-grid { display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0; }
-  .pill { padding: 3px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; border: 1px solid; }
-
-  /* ── How it works ── */
-  .flow { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 16px; }
-  .flow-step { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px; }
-  .flow-step-num { font-family: var(--mono); font-size: 11px; color: var(--text-dim); margin-bottom: 8px; }
-  .flow-step-title { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
-  .flow-step-desc { font-size: 12px; color: var(--text-muted); line-height: 1.6; }
-
-  /* ── Scroll spy ── */
-  section { scroll-margin-top: 32px; }
-
-  @media (max-width: 768px) {
-    .shell { grid-template-columns: 1fr; }
-    nav { position: relative; height: auto; }
-    main { padding: 24px; }
-    .flow { grid-template-columns: 1fr; }
-  }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+--bg: #ffffff;
+--surface: #f8f8f9;
+--surface-2: #f0f0f2;
+--border: #e0e0e4;
+--border-hover: #b0b0b8;
+--text: #0d0d10;
+--text-muted: #55555f;
+--text-dim: #9999a8;
+--accent: #0066cc;
+--accent-2: #cc4400;
+--green: #1a7a1a;
+--mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+--sans: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
+}
+body { background: var(--bg); color: var(--text); font-family: var(--sans); font-size: 14px; line-height: 1.6; min-height: 100vh; }
+.shell { display: grid; grid-template-columns: 220px 1fr; min-height: 100vh; }
+nav { position: sticky; top: 0; height: 100vh; overflow-y: auto; background: var(--surface); border-right: 1px solid var(--border); padding: 24px 0; display: flex; flex-direction: column; gap: 0; }
+.nav-logo { padding: 0 20px 24px; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+.nav-logo-mark { display: flex; align-items: center; gap: 8px; }
+.nav-logo-mark span:first-child { width: 28px; height: 28px; background: #0066cc; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; color: #fff; flex-shrink: 0; }
+.nav-logo-mark span:last-child { font-size: 13px; font-weight: 600; color: var(--text); letter-spacing: -0.3px; }
+.nav-subtitle { font-size: 11px; color: var(--text-muted); margin-top: 4px; padding-left: 36px; }
+.nav-section { padding: 6px 20px 4px; font-size: 10px; font-weight: 700; color: var(--text-dim); letter-spacing: 1.2px; text-transform: uppercase; }
+nav a { display: block; padding: 7px 20px; font-size: 13px; color: var(--text-muted); text-decoration: none; border-left: 2px solid transparent; transition: all 0.15s; }
+nav a:hover { color: var(--text); background: var(--surface-2); }
+nav a.active { color: var(--accent); border-left-color: var(--accent); background: rgba(0,102,204,0.06); }
+main { padding: 48px 48px 96px; max-width: 1100px; }
+.page-header { margin-bottom: 56px; padding-bottom: 32px; border-bottom: 1px solid var(--border); }
+.page-header h1 { font-size: 28px; font-weight: 700; letter-spacing: -0.5px; color: var(--text); }
+.page-header p { margin-top: 8px; color: var(--text-muted); font-size: 14px; max-width: 600px; line-height: 1.7; }
+.badge-row { display: flex; gap: 8px; margin-top: 16px; flex-wrap: wrap; }
+.badge { padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; letter-spacing: 0.3px; }
+.badge-blue { background: rgba(0,102,204,0.08); color: #0055aa; }
+.badge-orange { background: rgba(204,68,0,0.08); color: #aa3300; }
+.badge-green { background: rgba(26,122,26,0.08); color: #1a6a1a; }
+.section { margin-bottom: 64px; }
+.section-header { display: flex; align-items: baseline; gap: 12px; margin-bottom: 4px; }
+.section-num { font-family: var(--mono); font-size: 11px; color: var(--text-dim); font-weight: 600; }
+.section-title { font-size: 18px; font-weight: 700; color: var(--text); letter-spacing: -0.3px; }
+.section-desc { font-size: 13px; color: var(--text-muted); margin-bottom: 20px; margin-top: 4px; }
+.brand-bar { display: flex; gap: 4px; margin-bottom: 16px; flex-wrap: wrap; }
+.brand-btn { padding: 5px 14px; border-radius: 6px; border: 1px solid var(--border); background: transparent; color: var(--text-muted); font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.15s; font-family: var(--sans); }
+.brand-btn:hover { border-color: var(--border-hover); color: var(--text); }
+.brand-btn.active { border-color: var(--accent); color: var(--accent); background: rgba(0,102,204,0.06); }
+.brand-btn[data-brand="exoz"].active { border-color: #b07800; color: #b07800; background: rgba(176,120,0,0.06); }
+.brand-btn[data-brand="rb"].active { border-color: #cc2010; color: #cc2010; background: rgba(204,32,16,0.06); }
+.brand-btn[data-brand="la"].active { border-color: #cc2d00; color: #cc2d00; background: rgba(204,45,0,0.06); }
+.brand-btn[data-brand="base"].active { border-color: #444; color: #222; background: rgba(0,0,0,0.04); }
+.bp-toggle { display: flex; gap: 0; margin-bottom: 16px; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; width: fit-content; }
+.bp-btn { padding: 6px 16px; background: transparent; border: none; color: var(--text-muted); font-size: 12px; font-weight: 600; cursor: pointer; font-family: var(--sans); transition: all 0.15s; }
+.bp-btn.active { background: var(--surface-2); color: var(--accent); }
+.token-table { width: 100%; border-collapse: collapse; }
+.token-table th { text-align: left; padding: 8px 12px; font-size: 10px; font-weight: 700; color: var(--text-dim); letter-spacing: 1px; text-transform: uppercase; border-bottom: 1px solid var(--border); }
+.token-table td { padding: 0; border-bottom: 1px solid var(--border); vertical-align: middle; }
+.token-table tr:last-child td { border-bottom: none; }
+.token-table tr:hover td { background: rgba(255,255,255,0.02); }
+.token-name { font-family: var(--mono); font-size: 12px; color: #0055aa; padding: 10px 12px; white-space: nowrap; }
+.token-css { font-family: var(--mono); font-size: 12px; color: #7700cc; padding: 10px 12px; white-space: nowrap; }
+.token-val { font-family: var(--mono); font-size: 12px; color: #1a7a1a; padding: 10px 12px; }
+.token-desc { font-size: 12px; color: var(--text-muted); padding: 10px 12px; }
+.copy-btn { background: none; border: 1px solid var(--border); border-radius: 4px; color: var(--text-dim); font-size: 10px; font-family: var(--mono); padding: 2px 6px; cursor: pointer; transition: all 0.15s; margin-left: 6px; vertical-align: middle; }
+.copy-btn:hover { border-color: var(--border-hover); color: var(--text-muted); }
+.copy-btn.copied { border-color: #1a7a1a; color: #1a7a1a; }
+/* Compact mode note badge */
+.compact-note { display: inline-block; font-size: 10px; font-weight: 600; color: #7700cc; background: rgba(119,0,204,0.07); border: 1px solid rgba(119,0,204,0.18); border-radius: 4px; padding: 1px 7px; margin-left: 8px; vertical-align: middle; letter-spacing: 0.2px; }
+.swatch-row { display: flex; align-items: center; gap: 10px; padding: 10px 12px; }
+.swatch { width: 24px; height: 24px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.1); flex-shrink: 0; }
+.swatch-hex { font-family: var(--mono); font-size: 12px; color: #1a7a1a; }
+.spacing-bar { display: inline-flex; align-items: center; gap: 8px; }
+.spacing-vis { height: 8px; background: rgba(0,102,204,0.2); border-radius: 2px; transition: width 0.3s ease; }
+.spacing-num { font-family: var(--mono); font-size: 12px; color: #1a7a1a; min-width: 36px; }
+.css-block { background: #f8f8f9; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-top: 20px; }
+.css-block-header { display: flex; align-items: center; justify-content: space-between; padding: 10px 16px; border-bottom: 1px solid var(--border); background: #f0f0f2; }
+.css-block-label { font-size: 11px; font-weight: 600; color: var(--text-muted); font-family: var(--mono); letter-spacing: 0.5px; }
+.css-copy-all { background: none; border: 1px solid var(--border); border-radius: 4px; color: var(--text-muted); font-size: 11px; padding: 3px 10px; cursor: pointer; font-family: var(--sans); transition: all 0.15s; }
+.css-copy-all:hover { border-color: var(--border-hover); color: var(--text); }
+.css-copy-all.copied { border-color: #1a7a1a; color: #1a7a1a; }
+pre { padding: 20px; font-family: var(--mono); font-size: 12px; line-height: 1.8; overflow-x: auto; color: var(--text); }
+.kw { color: #aa00aa; }
+.sel { color: #7700cc; }
+.prop { color: #0055aa; }
+.val { color: #1a7a1a; }
+.cmt { color: #9999a8; }
+.type-preview-row { padding: 14px 12px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 16px; }
+.type-preview-row:last-child { border-bottom: none; }
+.type-sample { color: var(--text); transition: font-size 0.3s ease, line-height 0.3s ease; }
+.type-meta { margin-left: auto; display: flex; gap: 24px; flex-shrink: 0; }
+.type-meta-item { text-align: right; }
+.type-meta-label { font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.8px; }
+.type-meta-val { font-family: var(--mono); font-size: 12px; color: var(--green); }
+.radius-grid { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 4px; }
+.radius-item { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.radius-box { width: 48px; height: 48px; background: #e8e8f0; border: 1px solid var(--border); transition: border-radius 0.3s; }
+.radius-label { font-family: var(--mono); font-size: 11px; color: var(--text-muted); text-align: center; }
+.shadow-preview { padding: 24px; background: #f0f0f2; border-radius: 8px; margin-top: 4px; display: flex; gap: 24px; flex-wrap: wrap; }
+.shadow-item { display: flex; flex-direction: column; gap: 10px; align-items: center; }
+.shadow-box { width: 80px; height: 56px; background: #ffffff; border-radius: 8px; }
+.shadow-name { font-family: var(--mono); font-size: 11px; color: var(--text-muted); }
+.pill-grid { display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0; }
+.pill { padding: 3px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; border: 1px solid; }
+.flow { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 16px; }
+.flow-step { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px; }
+.flow-step-num { font-family: var(--mono); font-size: 11px; color: var(--text-dim); margin-bottom: 8px; }
+.flow-step-title { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+.flow-step-desc { font-size: 12px; color: var(--text-muted); line-height: 1.6; }
+/* Spacing impl note box */
+.impl-note { background: #f0f4ff; border: 1px solid #c0d0f0; border-radius: 8px; padding: 14px 18px; margin-bottom: 18px; font-size: 12px; color: #334; line-height: 1.7; }
+/* v2 proposed badge */
+.v2-badge { display: inline-block; font-size: 10px; font-weight: 700; color: #7a5a00; background: #fffbeb; border: 1px solid #f0d080; border-radius: 4px; padding: 1px 7px; margin-left: 8px; vertical-align: middle; letter-spacing: 0.2px; }
+/* Section divider within a table */
+.token-table tr.section-divider td { background: var(--surface); padding: 6px 12px; font-size: 10px; font-weight: 700; color: var(--text-dim); letter-spacing: 1px; text-transform: uppercase; border-bottom: 1px solid var(--border); }
+/* Muted row for proposed tokens */
+.token-table tr.proposed td { opacity: 0.75; }
+.impl-note strong { color: #0044aa; }
+section { scroll-margin-top: 32px; }
+@media (max-width: 768px) {
+  .shell { grid-template-columns: 1fr; }
+  nav { position: relative; height: auto; }
+  main { padding: 24px; }
+  .flow { grid-template-columns: 1fr; }
+}
 </style>
 </head>
 <body>
-
 <div class="shell">
-
-<!-- ── SIDEBAR ── -->
 <nav id="sidebar">
   <div class="nav-logo">
     <div class="nav-logo-mark">
@@ -171,10 +140,8 @@
     </div>
     <div class="nav-subtitle">Token Export Preview</div>
   </div>
-
   <div class="nav-section">Overview</div>
   <a href="#how-it-works">How it works</a>
-
   <div class="nav-section">Tokens</div>
   <a href="#spacing">Spacing scale</a>
   <a href="#typography">Typography</a>
@@ -183,15 +150,14 @@
   <a href="#shadow">Shadows</a>
   <a href="#pills">Pills &amp; status</a>
   <a href="#tags">Category tags</a>
-
   <div class="nav-section">Export</div>
   <a href="#css-output">CSS output</a>
+  <a href="#changelog">Changelog</a>
+  <a href="#token-mapping">Token mapping</a>
   <a href="#next-steps">Next steps</a>
 </nav>
 
-<!-- ── MAIN ── -->
 <main>
-
   <div class="page-header">
     <h1>BRG Design System · Token Reference</h1>
     <p>Preview of how Figma design tokens map to CSS custom properties. Token names are proposals — confirm with dev before Token Studio setup.</p>
@@ -206,12 +172,12 @@
   <div style="background:#fffbeb;border:1px solid #f0d080;border-radius:8px;padding:16px 20px;margin-bottom:40px;display:flex;gap:12px;align-items:flex-start">
     <span style="font-size:18px;flex-shrink:0">🚧</span>
     <div>
-      <div style="font-size:13px;font-weight:700;color:#7a5a00;margin-bottom:4px">🚧 WIP — Foundation skeleton in place, naming convention pending</div>
+      <div style="font-size:13px;font-weight:700;color:#7a5a00;margin-bottom:4px">WIP — Foundation skeleton in place, naming convention pending</div>
       <div style="font-size:12px;color:#6a4a00;line-height:1.7">All token collections are structured and scoped. Next step: confirm CSS custom property naming convention with dev before Token Studio setup. Once naming is locked, component library build begins — Button → Badge/Tag → Card. Use <code style="font-family:var(--mono);font-size:11px;background:rgba(0,0,0,0.06);padding:1px 5px;border-radius:3px">Semantic/Mapped</code> for colour and radius, <code style="font-family:var(--mono);font-size:11px;background:rgba(0,0,0,0.06);padding:1px 5px;border-radius:3px">Semantic/Layout</code> for spacing and font sizes.</div>
     </div>
   </div>
 
-  <!-- ── HOW IT WORKS ── -->
+  <!-- HOW IT WORKS -->
   <section id="how-it-works" class="section">
     <div class="section-header">
       <span class="section-num">00</span>
@@ -232,18 +198,23 @@
       <div class="flow-step">
         <div class="flow-step-num">LAYER 3</div>
         <div class="flow-step-title">CSS export</div>
-        <div class="flow-step-desc">Token Studio reads variables → Style Dictionary outputs CSS custom properties → injected per brand via class on <code style="font-family:var(--mono);font-size:11px;color:#0055aa;background:#f0f0f2;padding:1px 5px;border-radius:3px">&lt;html&gt;</code>. Media query handles breakpoints.</div>
+        <div class="flow-step-desc">Token Studio reads variables → Style Dictionary outputs CSS custom properties → injected per brand via class on <code style="font-family:var(--mono);font-size:11px;color:#0055aa;background:#f0f0f2;padding:1px 5px;border-radius:3px">&lt;html&gt;</code>. Media query or <code style="font-family:var(--mono);font-size:11px;color:#0055aa;background:#f0f0f2;padding:1px 5px;border-radius:3px">.compact</code> class handles breakpoints.</div>
       </div>
     </div>
   </section>
 
-  <!-- ── SPACING ── -->
+  <!-- SPACING -->
   <section id="spacing" class="section">
     <div class="section-header">
       <span class="section-num">01</span>
       <span class="section-title">Spacing scale</span>
     </div>
     <p class="section-desc">Semantic/Layout · 8pt grid · foundational scale for all padding, margin and gap. Adoption is mechanical — pick the size, use the token.</p>
+
+    <div class="impl-note">
+      <strong>How Expanded vs Compact works in code</strong><br>
+      Each token has two CSS variable names — a base name for desktop and a <code style="font-family:var(--mono);font-size:11px">-compact</code> suffix for mobile. During migration, components opt in individually: use <code style="font-family:var(--mono);font-size:11px">var(--spacing-m)</code> on desktop and <code style="font-family:var(--mono);font-size:11px">var(--spacing-m-compact)</code> inside a breakpoint or <code style="font-family:var(--mono);font-size:11px">.compact</code> class. In v2, both will collapse into a single token driven by a global media query override.
+    </div>
 
     <div class="bp-toggle">
       <button class="bp-btn active" onclick="setBreakpoint('expanded', this)">Expanded</button>
@@ -257,64 +228,77 @@
         <th>Value</th>
         <th>Visual</th>
       </tr></thead>
-      <tbody id="spacing-tbody">
-      </tbody>
+      <tbody id="spacing-tbody"></tbody>
     </table>
   </section>
 
-  <!-- ── TYPOGRAPHY ── -->
+  <!-- TYPOGRAPHY -->
   <section id="typography" class="section">
     <div class="section-header">
       <span class="section-num">02</span>
       <span class="section-title">Typography</span>
     </div>
-    <p class="section-desc">Font sizes and line heights from Semantic/Layout (breakpoint-aware). Font family and weight from Semantic/Typography (brand-aware).</p>
+    <p class="section-desc">Font family and weight tokens are live in all storefronts now. Font-size tokens are proposed for v2 — they require the heading component refactor before adoption.</p>
 
-    <div class="bp-toggle" style="margin-bottom:8px">
-      <button class="bp-btn active" onclick="setTypoBp('expanded', this)">Expanded</button>
-      <button class="bp-btn" onclick="setTypoBp('compact', this)">Compact</button>
-    </div>
-    <div class="brand-bar" id="typo-brand-bar">
-      <button class="brand-btn active" data-brand="adr" onclick="setBrand('adr', this)">Adrenaline</button>
-      <button class="brand-btn" data-brand="exoz" onclick="setBrand('exoz', this)">ExperienceOz</button>
-      <button class="brand-btn" data-brand="rb" onclick="setBrand('rb', this)">RedBalloon</button>
-      <button class="brand-btn" data-brand="la" onclick="setBrand('la', this)">Local Agent</button>
-      <button class="brand-btn" data-brand="base" onclick="setBrand('base', this)">Base</button>
-    </div>
-
-    <table class="token-table">
-      <thead><tr>
-        <th>Figma token</th>
-        <th>CSS property</th>
-        <th>Preview</th>
-        <th style="text-align:right">Size</th>
-      </tr></thead>
-      <tbody id="typo-tbody"></tbody>
-    </table>
-
-    <div style="margin-top:24px">
-      <div class="section-header" style="margin-bottom:12px">
-        <span class="section-num" style="font-size:10px">FONT FAMILIES</span>
+    <!-- TIER 1: LIVE NOW -->
+    <div style="margin-bottom:28px">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+        <span style="font-size:11px;font-weight:700;color:#1a6a1a;text-transform:uppercase;letter-spacing:0.8px">Tier 1 — Live now</span>
+        <span style="font-size:11px;color:var(--text-muted)">Already in storefronts · safe to adopt immediately</span>
       </div>
+
+      <div class="brand-bar" id="typo-brand-bar">
+        <button class="brand-btn active" data-brand="adr" onclick="setBrand('adr', this)">Adrenaline</button>
+        <button class="brand-btn" data-brand="exoz" onclick="setBrand('exoz', this)">ExperienceOz</button>
+        <button class="brand-btn" data-brand="rb" onclick="setBrand('rb', this)">RedBalloon</button>
+        <button class="brand-btn" data-brand="la" onclick="setBrand('la', this)">Local Agent</button>
+        <button class="brand-btn" data-brand="base" onclick="setBrand('base', this)">Base</button>
+      </div>
+
       <table class="token-table">
         <thead><tr>
-          <th>Role</th>
-          <th>CSS property</th>
-          <th id="ff-brand-label">Adrenaline</th>
+          <th>Figma token</th>
+          <th>CSS custom property</th>
+          <th id="ff-brand-label">Adrenaline value</th>
         </tr></thead>
         <tbody id="fontfamily-tbody"></tbody>
       </table>
     </div>
+
+    <!-- TIER 2: V2 PROPOSED -->
+    <div>
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+        <span style="font-size:11px;font-weight:700;color:#7a5a00;text-transform:uppercase;letter-spacing:0.8px">Tier 2 — v2 Proposed</span>
+        <span style="font-size:11px;color:var(--text-muted)">Requires heading component refactor · ~1,024 refs across 366 files</span>
+      </div>
+      <div class="impl-note" style="background:#fffbeb;border-color:#f0d080;color:#6a4a00;margin-bottom:14px">
+        <strong style="color:#7a5a00">Why these don't exist yet:</strong> Font sizes are currently controlled by the <code style="font-family:var(--mono);font-size:11px">HEADING_TYPOGRAPHY</code> constant in TypeScript and baked into the shared heading component — not CSS variables. These tokens define the <em>target state</em> for when the heading component is refactored in v2. Do not implement until that refactor is scoped and ticketed.
+      </div>
+
+      <div class="bp-toggle" style="margin-bottom:12px">
+        <button class="bp-btn active" onclick="setTypoBp('expanded', this)">Expanded</button>
+        <button class="bp-btn" onclick="setTypoBp('compact', this)">Compact</button>
+      </div>
+
+      <table class="token-table">
+        <thead><tr>
+          <th>Figma token</th>
+          <th>CSS property <span class="v2-badge">v2 · proposed</span></th>
+          <th>Preview</th>
+          <th style="text-align:right">Size</th>
+        </tr></thead>
+        <tbody id="typo-tbody"></tbody>
+      </table>
+    </div>
   </section>
 
-  <!-- ── COLOUR ── -->
+  <!-- COLOUR -->
   <section id="colour" class="section">
     <div class="section-header">
       <span class="section-num">03</span>
       <span class="section-title">Colour</span>
     </div>
     <p class="section-desc">Semantic/Mapped — the only colour tokens components should reference. Switch brand to see how tokens resolve per brand.</p>
-
     <div class="brand-bar">
       <button class="brand-btn active" data-brand="adr" onclick="setColourBrand('adr', this)">Adrenaline</button>
       <button class="brand-btn" data-brand="exoz" onclick="setColourBrand('exoz', this)">ExperienceOz</button>
@@ -322,7 +306,6 @@
       <button class="brand-btn" data-brand="la" onclick="setColourBrand('la', this)">Local Agent</button>
       <button class="brand-btn" data-brand="base" onclick="setColourBrand('base', this)">Base</button>
     </div>
-
     <table class="token-table">
       <thead><tr>
         <th>Figma token</th>
@@ -333,16 +316,14 @@
     </table>
   </section>
 
-  <!-- ── RADIUS ── -->
+  <!-- RADIUS -->
   <section id="radius" class="section">
     <div class="section-header">
       <span class="section-num">04</span>
       <span class="section-title">Radius</span>
     </div>
     <p class="section-desc">Semantic/Radius · same scale across all brands · values differ per brand for default radius.</p>
-
     <div class="radius-grid" id="radius-grid"></div>
-
     <div style="margin-top:24px">
       <table class="token-table">
         <thead><tr><th>Figma token</th><th>CSS custom property</th><th>Value</th></tr></thead>
@@ -351,33 +332,19 @@
     </div>
   </section>
 
-  <!-- ── SHADOWS ── -->
+  <!-- SHADOWS -->
   <section id="shadow" class="section">
     <div class="section-header">
       <span class="section-num">05</span>
       <span class="section-title">Shadows</span>
     </div>
     <p class="section-desc">Semantic/Mapped · shared across all brands · used for nav, cards, modals and tooltips.</p>
-
     <div class="shadow-preview">
-      <div class="shadow-item">
-        <div class="shadow-box" style="box-shadow:0 8px 12px -4px rgba(0,0,0,0.5)"></div>
-        <div class="shadow-name">shadow/nav</div>
-      </div>
-      <div class="shadow-item">
-        <div class="shadow-box" style="box-shadow:0 8px 8px -4px rgba(0,0,0,0.5)"></div>
-        <div class="shadow-name">shadow/card</div>
-      </div>
-      <div class="shadow-item">
-        <div class="shadow-box" style="box-shadow:0 8px 24px rgba(0,0,0,0.5)"></div>
-        <div class="shadow-name">shadow/modal</div>
-      </div>
-      <div class="shadow-item">
-        <div class="shadow-box" style="box-shadow:0 2px 8px rgba(99,99,99,0.6)"></div>
-        <div class="shadow-name">shadow/tooltip</div>
-      </div>
+      <div class="shadow-item"><div class="shadow-box" style="box-shadow:0 8px 12px -4px rgba(0,0,0,0.5)"></div><div class="shadow-name">shadow/nav</div></div>
+      <div class="shadow-item"><div class="shadow-box" style="box-shadow:0 8px 8px -4px rgba(0,0,0,0.5)"></div><div class="shadow-name">shadow/card</div></div>
+      <div class="shadow-item"><div class="shadow-box" style="box-shadow:0 8px 24px rgba(0,0,0,0.5)"></div><div class="shadow-name">shadow/modal</div></div>
+      <div class="shadow-item"><div class="shadow-box" style="box-shadow:0 2px 8px rgba(99,99,99,0.6)"></div><div class="shadow-name">shadow/tooltip</div></div>
     </div>
-
     <table class="token-table" style="margin-top:16px">
       <thead><tr><th>Figma token</th><th>CSS custom property</th><th>Value</th><th>Use</th></tr></thead>
       <tbody>
@@ -389,7 +356,7 @@
     </table>
   </section>
 
-  <!-- ── PILLS ── -->
+  <!-- PILLS -->
   <section id="pills" class="section">
     <div class="section-header">
       <span class="section-num">06</span>
@@ -415,13 +382,13 @@
     </table>
   </section>
 
-  <!-- ── TAGS ── -->
+  <!-- TAGS -->
   <section id="tags" class="section">
     <div class="section-header">
       <span class="section-num">07</span>
       <span class="section-title">Category tags</span>
     </div>
-    <p class="section-desc">Semantic/Mapped · shared across all brands · product card feature labels. Each tag has a distinct colour to aid scannability.</p>
+    <p class="section-desc">Semantic/Mapped · shared across all brands · product card feature labels.</p>
     <div class="pill-grid" style="margin-bottom:20px">
       <span class="pill" style="background:#fce8e8;color:#c01010;border-color:#f0a0a0">🔥 Hot deal</span>
       <span class="pill" style="background:#fff8e0;color:#8a6000;border-color:#e8c840">⭐ Best seller</span>
@@ -443,14 +410,13 @@
     </table>
   </section>
 
-  <!-- ── CSS OUTPUT ── -->
+  <!-- CSS OUTPUT -->
   <section id="css-output" class="section">
     <div class="section-header">
       <span class="section-num">08</span>
       <span class="section-title">CSS output preview</span>
     </div>
     <p class="section-desc">Illustrative output from Token Studio + Style Dictionary. Final format to be agreed before implementation.</p>
-
     <div class="brand-bar">
       <button class="brand-btn active" data-brand="adr" onclick="setCssBrand('adr', this)">Adrenaline</button>
       <button class="brand-btn" data-brand="exoz" onclick="setCssBrand('exoz', this)">ExperienceOz</button>
@@ -458,7 +424,6 @@
       <button class="brand-btn" data-brand="la" onclick="setCssBrand('la', this)">Local Agent</button>
       <button class="brand-btn" data-brand="base" onclick="setCssBrand('base', this)">Base</button>
     </div>
-
     <div class="css-block">
       <div class="css-block-header">
         <span class="css-block-label" id="css-label">brand-adrenaline.css</span>
@@ -468,125 +433,285 @@
     </div>
   </section>
 
-  <!-- ── NEXT STEPS ── -->
-  <section id="next-steps" class="section">
+  <!-- CHANGELOG -->
+  <section id="changelog" class="section">
     <div class="section-header">
       <span class="section-num">09</span>
+      <span class="section-title">Changelog</span>
+    </div>
+    <p class="section-desc">A record of all design system changes. Most recent first.</p>
+
+    <div style="display:flex;flex-direction:column;gap:24px;margin-top:8px">
+
+      <!-- Entry -->
+      <div style="border:1px solid var(--border);border-radius:10px;overflow:hidden">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:var(--surface);border-bottom:1px solid var(--border)">
+          <div style="display:flex;align-items:center;gap:10px">
+            <span style="font-family:var(--mono);font-size:12px;color:var(--text-muted)">19 Jun 2026</span>
+            <span style="font-size:12px;font-weight:700;color:var(--text)">Spacing scale alignment + typography split</span>
+          </div>
+          <span style="font-size:11px;font-weight:600;color:#0055aa;background:rgba(0,102,204,0.07);border:1px solid rgba(0,102,204,0.18);border-radius:4px;padding:2px 8px">Foundation</span>
+        </div>
+        <div style="padding:16px">
+          <table class="token-table" style="margin:0">
+            <thead><tr>
+              <th style="width:140px">Area</th>
+              <th>Change</th>
+              <th style="width:100px">Type</th>
+            </tr></thead>
+            <tbody>
+              <tr>
+                <td class="token-desc" style="font-weight:600;color:var(--text);white-space:nowrap">Primitives</td>
+                <td class="token-desc">Removed <code style="font-family:var(--mono);font-size:11px;background:#f0f0f2;padding:1px 5px;border-radius:3px">spacing/48</code> and <code style="font-family:var(--mono);font-size:11px;background:#f0f0f2;padding:1px 5px;border-radius:3px">spacing/64</code> — not in Jira dev scale (BAI-10860). Added <code style="font-family:var(--mono);font-size:11px;background:#f0f0f2;padding:1px 5px;border-radius:3px">spacing/12</code> and <code style="font-family:var(--mono);font-size:11px;background:#f0f0f2;padding:1px 5px;border-radius:3px">spacing/56</code> to fill gaps.</td>
+                <td style="padding:10px 12px"><span style="font-size:10px;font-weight:700;color:#7a1a00;background:rgba(204,68,0,0.08);border:1px solid rgba(204,68,0,0.2);border-radius:4px;padding:2px 7px">Breaking</span></td>
+              </tr>
+              <tr>
+                <td class="token-desc" style="font-weight:600;color:var(--text);white-space:nowrap">Semantic/Layout</td>
+                <td class="token-desc">Added WEB code syntax to all 9 spacing tokens — now shows correct CSS var name in Figma inspector and Token Studio export (e.g. <code style="font-family:var(--mono);font-size:11px;background:#f0f0f2;padding:1px 5px;border-radius:3px">--spacing-m</code>).</td>
+                <td style="padding:10px 12px"><span style="font-size:10px;font-weight:700;color:#1a5a00;background:rgba(26,122,26,0.08);border:1px solid rgba(26,122,26,0.2);border-radius:4px;padding:2px 7px">Additive</span></td>
+              </tr>
+              <tr>
+                <td class="token-desc" style="font-weight:600;color:var(--text);white-space:nowrap">Token ref site</td>
+                <td class="token-desc">Compact tab now shows <code style="font-family:var(--mono);font-size:11px;background:#f0f0f2;padding:1px 5px;border-radius:3px">--spacing-m-compact</code> naming in the CSS column — matches dev's flat two-variable migration approach. Copy button copies the correct compact var name.</td>
+                <td style="padding:10px 12px"><span style="font-size:10px;font-weight:700;color:#1a5a00;background:rgba(26,122,26,0.08);border:1px solid rgba(26,122,26,0.2);border-radius:4px;padding:2px 7px">Additive</span></td>
+              </tr>
+              <tr>
+                <td class="token-desc" style="font-weight:600;color:var(--text);white-space:nowrap">Token ref site</td>
+                <td class="token-desc">CSS output section updated — shows both <code style="font-family:var(--mono);font-size:11px;background:#f0f0f2;padding:1px 5px;border-radius:3px">--spacing-m</code> (desktop) and <code style="font-family:var(--mono);font-size:11px;background:#f0f0f2;padding:1px 5px;border-radius:3px">--spacing-m-compact</code> (mobile) with a commented usage pattern for component-level opt-in.</td>
+                <td style="padding:10px 12px"><span style="font-size:10px;font-weight:700;color:#004a7a;background:rgba(0,102,204,0.07);border:1px solid rgba(0,102,204,0.18);border-radius:4px;padding:2px 7px">Update</span></td>
+              </tr>
+              <tr>
+                <td class="token-desc" style="font-weight:600;color:var(--text);white-space:nowrap">Token ref site</td>
+                <td class="token-desc">Typography section split into two tiers. <strong>Tier 1 (live):</strong> font family + weight tokens already in storefronts — <code style="font-family:var(--mono);font-size:11px;background:#f0f0f2;padding:1px 5px;border-radius:3px">--font-family-*</code>, <code style="font-family:var(--mono);font-size:11px;background:#f0f0f2;padding:1px 5px;border-radius:3px">--font-weight-*</code>, <code style="font-family:var(--mono);font-size:11px;background:#f0f0f2;padding:1px 5px;border-radius:3px">--font-heading-weight</code>. <strong>Tier 2 (v2 proposed):</strong> font-size scale tokens badged as proposed — blocked by heading component refactor (~1,024 refs, 366 files).</td>
+                <td style="padding:10px 12px"><span style="font-size:10px;font-weight:700;color:#004a7a;background:rgba(0,102,204,0.07);border:1px solid rgba(0,102,204,0.18);border-radius:4px;padding:2px 7px">Update</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- TOKEN MAPPING -->
+  <section id="token-mapping" class="section">
+    <div class="section-header">
+      <span class="section-num">10</span>
+      <span class="section-title">Token mapping — v1 Confluence → v2 Design system</span>
+    </div>
+    <p class="section-desc">How existing Confluence tokens map to the new system, and what's been added and why. The core shift: v1 names things by what it <em>looks like</em>. v2 names things by what it <em>does</em>.</p>
+
+    <div style="background:#f8f0ff;border:1px solid #ddb8f8;border-radius:8px;padding:14px 18px;margin-bottom:24px;font-size:12px;color:#44006a;line-height:1.7">
+      <strong>The structural problem with v1:</strong> tokens like <code style="font-family:var(--mono);font-size:11px;background:rgba(0,0,0,0.06);padding:1px 5px;border-radius:3px">--brand-primary</code> are used for both button backgrounds <em>and</em> text colour in different components. When a whitelabel sets their primary colour, text layered on top becomes unreadable because nothing in the system guarantees contrast. v2 solves this structurally — not by checking, but by making it impossible to misuse.
+    </div>
+
+    <!-- COLOUR TOKENS -->
+    <div style="margin-bottom:32px">
+      <div style="font-size:11px;font-weight:700;color:var(--text-dim);letter-spacing:1px;text-transform:uppercase;margin-bottom:12px">Colour</div>
+      <table class="token-table">
+        <thead><tr>
+          <th style="width:220px">v1 Confluence token</th>
+          <th style="width:220px">v2 Design system token</th>
+          <th>Why the change</th>
+          <th style="width:80px">Status</th>
+        </tr></thead>
+        <tbody>
+          <tr>
+            <td class="token-css" style="color:#888">--brand-primary</td>
+            <td class="token-css">surface/brand</td>
+            <td class="token-desc"><code style="font-family:var(--mono);font-size:11px;background:#f0f0f2;padding:1px 5px;border-radius:3px">--brand-primary</code> was used for both button fills <em>and</em> text colour — impossible to know if a swap breaks contrast. <code style="font-family:var(--mono);font-size:11px;background:#f0f0f2;padding:1px 5px;border-radius:3px">surface/brand</code> is explicitly a background fill token only. The companion <code style="font-family:var(--mono);font-size:11px;background:#f0f0f2;padding:1px 5px;border-radius:3px">text/on-surface-brand</code> always tells you what's safe to put on top of it.</td>
+            <td style="padding:10px 12px"><span style="font-size:10px;font-weight:700;color:#004a7a;background:rgba(0,102,204,0.07);border:1px solid rgba(0,102,204,0.18);border-radius:4px;padding:2px 7px">Mapped</span></td>
+          </tr>
+          <tr>
+            <td class="token-css" style="color:#888">—</td>
+            <td class="token-css">surface/brand-dark</td>
+            <td class="token-desc">No equivalent in v1. Dev was darkening <code style="font-family:var(--mono);font-size:11px;background:#f0f0f2;padding:1px 5px;border-radius:3px">--brand-primary</code> arbitrarily or reusing <code style="font-family:var(--mono);font-size:11px;background:#f0f0f2;padding:1px 5px;border-radius:3px">--brand-secondary</code> (a dark neutral, not a dark brand). Powers button hover states and dark hero gradient overlays.</td>
+            <td style="padding:10px 12px"><span style="font-size:10px;font-weight:700;color:#1a5a00;background:rgba(26,122,26,0.08);border:1px solid rgba(26,122,26,0.2);border-radius:4px;padding:2px 7px">New</span></td>
+          </tr>
+          <tr>
+            <td class="token-css" style="color:#888">--bg-white<br><span style="color:#aaa;font-size:11px">--bg-primary-grey</span></td>
+            <td class="token-css">surface/page<br><span style="font-size:11px">surface/card<br>surface/bg</span></td>
+            <td class="token-desc">v1 uses literal colour names — <code style="font-family:var(--mono);font-size:11px;background:#f0f0f2;padding:1px 5px;border-radius:3px">--bg-white</code> breaks the moment a whitelabel wants a warm off-white page. <code style="font-family:var(--mono);font-size:11px;background:#f0f0f2;padding:1px 5px;border-radius:3px">surface/page</code> describes intent — the actual colour is set per brand in the mode. No code changes needed for a whitelabel to customise.</td>
+            <td style="padding:10px 12px"><span style="font-size:10px;font-weight:700;color:#004a7a;background:rgba(0,102,204,0.07);border:1px solid rgba(0,102,204,0.18);border-radius:4px;padding:2px 7px">Mapped</span></td>
+          </tr>
+          <tr>
+            <td class="token-css" style="color:#888">—</td>
+            <td class="token-css" style="color:#c00">text/on-surface-brand</td>
+            <td class="token-desc"><strong style="color:var(--text)">The most critical new token.</strong> Directly solves the SkyBus/DreamWorld whitelabel contrast bug. When a brand sets <code style="font-family:var(--mono);font-size:11px;background:#f0f0f2;padding:1px 5px;border-radius:3px">surface/brand</code>, this token tells any component what text colour is guaranteed readable on top — per brand. ExOz: black on yellow. Adrenaline: charcoal on cyan. RedBalloon: white on red. Without it, the platform guesses — which is why the bug keeps happening.</td>
+            <td style="padding:10px 12px"><span style="font-size:10px;font-weight:700;color:#1a5a00;background:rgba(26,122,26,0.08);border:1px solid rgba(26,122,26,0.2);border-radius:4px;padding:2px 7px">New</span></td>
+          </tr>
+          <tr>
+            <td class="token-css" style="color:#888">--text-primary-light</td>
+            <td class="token-css">text/secondary</td>
+            <td class="token-desc"><code style="font-family:var(--mono);font-size:11px;background:#f0f0f2;padding:1px 5px;border-radius:3px">text-primary-light</code> implies it's a lighter version of primary — but it's actually used for supporting copy, labels, and muted UI. <code style="font-family:var(--mono);font-size:11px;background:#f0f0f2;padding:1px 5px;border-radius:3px">secondary</code> matches intent and aligns with industry convention (Material, Radix, Tailwind).</td>
+            <td style="padding:10px 12px"><span style="font-size:10px;font-weight:700;color:#004a7a;background:rgba(0,102,204,0.07);border:1px solid rgba(0,102,204,0.18);border-radius:4px;padding:2px 7px">Mapped</span></td>
+          </tr>
+          <tr>
+            <td class="token-css" style="color:#888">—</td>
+            <td class="token-css">text/brand</td>
+            <td class="token-desc">No coloured text token in v1 at all. Dev was using <code style="font-family:var(--mono);font-size:11px;background:#f0f0f2;padding:1px 5px;border-radius:3px">--brand-primary</code> for coloured links and price highlights — the same variable as button fills. Adrenaline uses their blue for <code style="font-family:var(--mono);font-size:11px;background:#f0f0f2;padding:1px 5px;border-radius:3px">text/brand</code> (not orange) because orange text on white fails contrast.</td>
+            <td style="padding:10px 12px"><span style="font-size:10px;font-weight:700;color:#1a5a00;background:rgba(26,122,26,0.08);border:1px solid rgba(26,122,26,0.2);border-radius:4px;padding:2px 7px">New</span></td>
+          </tr>
+          <tr>
+            <td class="token-css" style="color:#888">--border-primary<br><span style="color:#aaa;font-size:11px">(maps to --bg-black)</span></td>
+            <td class="token-css">border/brand<br><span style="font-size:11px">border/success<br>border/warning<br>border/error</span></td>
+            <td class="token-desc">v1 has one border token (black). No semantic borders at all. Without these, input validation states, selected card outlines, and focus rings are hardcoded or misuse brand variables.</td>
+            <td style="padding:10px 12px"><span style="font-size:10px;font-weight:700;color:#1a5a00;background:rgba(26,122,26,0.08);border:1px solid rgba(26,122,26,0.2);border-radius:4px;padding:2px 7px">New</span></td>
+          </tr>
+          <tr>
+            <td class="token-css" style="color:#888">—</td>
+            <td class="token-css">icon/default<br><span style="font-size:11px">icon/muted<br>icon/inverse<br>icon/brand</span></td>
+            <td class="token-desc">No icon tokens in v1. Icons currently inherit text colour or are hardcoded fills. These tokens let icons respond to brand mode switching automatically without per-component overrides.</td>
+            <td style="padding:10px 12px"><span style="font-size:10px;font-weight:700;color:#1a5a00;background:rgba(26,122,26,0.08);border:1px solid rgba(26,122,26,0.2);border-radius:4px;padding:2px 7px">New</span></td>
+          </tr>
+          <tr>
+            <td class="token-css" style="color:#888">—</td>
+            <td class="token-css">interactive/brand-hover<br><span style="font-size:11px">interactive/brand-pressed</span></td>
+            <td class="token-desc">No interactive state tokens in v1. Hover and pressed states are hardcoded hex values or not implemented. Formalises the pattern Smarajit already built in primitives (e.g. <code style="font-family:var(--mono);font-size:11px;background:#f0f0f2;padding:1px 5px;border-radius:3px">colour/adr/charcoal-hover</code>) into semantic tokens any component can reference.</td>
+            <td style="padding:10px 12px"><span style="font-size:10px;font-weight:700;color:#1a5a00;background:rgba(26,122,26,0.08);border:1px solid rgba(26,122,26,0.2);border-radius:4px;padding:2px 7px">New</span></td>
+          </tr>
+          <tr>
+            <td class="token-css" style="color:#888">--ui-red<br><span style="color:#aaa;font-size:11px">--ui-green<br>--ui-blue</span></td>
+            <td class="token-css">status/error-bg + status/error-text<br><span style="font-size:11px">status/success-bg + status/success-text<br>status/warning-bg + status/warning-text</span></td>
+            <td class="token-desc">v1 defines one colour per state. Our status tokens split each into a background (light tint) and foreground (readable text on that tint) — so an error toast uses <code style="font-family:var(--mono);font-size:11px;background:#f0f0f2;padding:1px 5px;border-radius:3px">status/error-bg</code> as fill and <code style="font-family:var(--mono);font-size:11px;background:#f0f0f2;padding:1px 5px;border-radius:3px">status/error-text</code> as label. Contrast is guaranteed by design.</td>
+            <td style="padding:10px 12px"><span style="font-size:10px;font-weight:700;color:#004a7a;background:rgba(0,102,204,0.07);border:1px solid rgba(0,102,204,0.18);border-radius:4px;padding:2px 7px">Mapped</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- RADIUS TOKENS -->
+    <div style="margin-bottom:32px">
+      <div style="font-size:11px;font-weight:700;color:var(--text-dim);letter-spacing:1px;text-transform:uppercase;margin-bottom:12px">Radius</div>
+      <table class="token-table">
+        <thead><tr>
+          <th style="width:220px">v1 Confluence token</th>
+          <th style="width:220px">v2 Design system token</th>
+          <th>Why the change</th>
+          <th style="width:80px">Status</th>
+        </tr></thead>
+        <tbody>
+          <tr>
+            <td class="token-css" style="color:#888">--radius-default<br><span style="color:#aaa;font-size:11px">--radius-button</span></td>
+            <td class="token-css">radius/sm · radius/md<br><span style="font-size:11px">radius/lg · radius/xl<br>radius/full · radius/button</span></td>
+            <td class="token-desc">v1 has 2 radius tokens. Adrenaline uses 4px defaults but shares <code style="font-family:var(--mono);font-size:11px;background:#f0f0f2;padding:1px 5px;border-radius:3px">--radius-default</code> for buttons too. ExOz and RedBalloon have 8px defaults but pill buttons. Without a scale, devs add storefront-specific variables — which is why Confluence already has 5 RedBalloon-specific <code style="font-family:var(--mono);font-size:11px;background:#f0f0f2;padding:1px 5px;border-radius:3px">--radius-*</code> extras, or hardcode values.</td>
+            <td style="padding:10px 12px"><span style="font-size:10px;font-weight:700;color:#004a7a;background:rgba(0,102,204,0.07);border:1px solid rgba(0,102,204,0.18);border-radius:4px;padding:2px 7px">Mapped</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- SPACING TOKENS -->
+    <div style="margin-bottom:32px">
+      <div style="font-size:11px;font-weight:700;color:var(--text-dim);letter-spacing:1px;text-transform:uppercase;margin-bottom:12px">Spacing</div>
+      <table class="token-table">
+        <thead><tr>
+          <th style="width:220px">v1 Confluence token</th>
+          <th style="width:220px">v2 Design system token</th>
+          <th>Why the change</th>
+          <th style="width:80px">Status</th>
+        </tr></thead>
+        <tbody>
+          <tr>
+            <td class="token-css" style="color:#888">— <span style="color:#aaa;font-size:11px">(hardcoded px values)</span></td>
+            <td class="token-css">spacing/XXXS → spacing/XXXL<br><span style="font-size:11px">+ compact equivalents</span></td>
+            <td class="token-desc">No spacing tokens in v1 at all — values are hardcoded across storefronts and shared libraries (noted in Tech Debt Registry). v2 introduces a 9-step 8pt scale with desktop and mobile values per token, aligned to Smarajit's BAI-10860 spec.</td>
+            <td style="padding:10px 12px"><span style="font-size:10px;font-weight:700;color:#1a5a00;background:rgba(26,122,26,0.08);border:1px solid rgba(26,122,26,0.2);border-radius:4px;padding:2px 7px">New</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- TYPOGRAPHY -->
+    <div>
+      <div style="font-size:11px;font-weight:700;color:var(--text-dim);letter-spacing:1px;text-transform:uppercase;margin-bottom:12px">Typography</div>
+      <table class="token-table">
+        <thead><tr>
+          <th style="width:220px">v1 Confluence token</th>
+          <th style="width:220px">v2 Design system token</th>
+          <th>Why the change</th>
+          <th style="width:80px">Status</th>
+        </tr></thead>
+        <tbody>
+          <tr>
+            <td class="token-css" style="color:#888">--font-family-heading<br><span style="color:#aaa;font-size:11px">--font-family-body<br>--font-weight-*<br>--font-heading-weight</span></td>
+            <td class="token-css">font/heading · font/body<br><span style="font-size:11px">font/display<br>font/weight-*<br>font/heading-weight</span></td>
+            <td class="token-desc">Direct carry-over — same intent, aligned naming. Added <code style="font-family:var(--mono);font-size:11px;background:#f0f0f2;padding:1px 5px;border-radius:3px">font/display</code> for hero/marketing use cases where a third typeface is needed (e.g. Adrenaline's Monologue).</td>
+            <td style="padding:10px 12px"><span style="font-size:10px;font-weight:700;color:#004a7a;background:rgba(0,102,204,0.07);border:1px solid rgba(0,102,204,0.18);border-radius:4px;padding:2px 7px">Mapped</span></td>
+          </tr>
+          <tr>
+            <td class="token-css" style="color:#888">— <span style="color:#aaa;font-size:11px">(HEADING_TYPOGRAPHY constant in TS)</span></td>
+            <td class="token-css">font-size/h1 → font-size/caption<br><span style="font-size:11px"><span class="v2-badge">v2 · proposed</span></span></td>
+            <td class="token-desc">Font sizes are baked into the heading component (~1,024 refs, 366 files) — not CSS variables. These tokens define the v2 target state. Cannot be adopted until the heading component refactor is scoped and ticketed.</td>
+            <td style="padding:10px 12px"><span style="font-size:10px;font-weight:700;color:#7a5a00;background:#fffbeb;border:1px solid #f0d080;border-radius:4px;padding:2px 7px">v2</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- NEXT STEPS -->
+  <section id="next-steps" class="section">
+    <div class="section-header">
+      <span class="section-num">11</span>
       <span class="section-title">Next steps</span>
     </div>
     <p class="section-desc">Roadmap to Token Studio integration.</p>
     <table class="token-table">
       <thead><tr><th>#</th><th>Step</th><th>Detail</th></tr></thead>
       <tbody>
-        <tr><td style="padding:10px 12px;font-family:var(--mono);font-size:12px;color:#1a7a1a">&#10003;</td><td class="token-desc" style="font-weight:600;color:#1a7a1a">Foundation complete</td><td class="token-desc">All 7 collections locked. Primitives, Semantic/Color, Radius, Typography, Spacing, Mapped, Layout all wired and scoped correctly.</td></tr>
+        <tr><td style="padding:10px 12px;font-family:var(--mono);font-size:12px;color:#1a7a1a">&#10003;</td><td class="token-desc" style="font-weight:600;color:#1a7a1a">Foundation complete</td><td class="token-desc">All collections locked. Primitives, Semantic/Color, Radius, Typography, Spacing, Mapped, Layout all wired and scoped correctly.</td></tr>
         <tr><td style="padding:10px 12px;font-family:var(--mono);font-size:12px;color:#0055aa">&#9654;</td><td class="token-desc" style="font-weight:600;color:var(--text)">Build component library</td><td class="token-desc">Start with Button → Badge/Tag → Card. Use Semantic/Mapped for colour + radius, Semantic/Layout for spacing + font sizes. No hardcoded values in components.</td></tr>
         <tr><td class="token-name" style="color:var(--text-dim)">3</td><td class="token-desc" style="font-weight:600;color:var(--text)">Confirm CSS naming</td><td class="token-desc">Agree final CSS custom property naming with dev before Token Studio setup. Names in this doc are proposals.</td></tr>
-        <tr><td class="token-name" style="color:var(--text-dim)">4</td><td class="token-desc" style="font-weight:600;color:var(--text)">GitHub Pages</td><td class="token-desc">Add this file to /docs folder in storefront-common-ui repo. Settings → Pages → Deploy from /docs. Live at github.io/storefront-common-ui.</td></tr>
-        <tr><td class="token-name" style="color:var(--text-dim)">5</td><td class="token-desc" style="font-weight:600;color:var(--text)">Install Token Studio</td><td class="token-desc">After ~10 core components are built and stable. Connect Figma → GitHub → Style Dictionary → CSS. PR workflow — no auto-deploy to production.</td></tr>
+        <tr><td class="token-name" style="color:var(--text-dim)">4</td><td class="token-desc" style="font-weight:600;color:var(--text)">GitHub Pages</td><td class="token-desc">Add this file to /docs folder in storefront-common-ui repo. Settings → Pages → Deploy from /docs.</td></tr>
+        <tr><td class="token-name" style="color:var(--text-dim)">5</td><td class="token-desc" style="font-weight:600;color:var(--text)">Install Token Studio</td><td class="token-desc">After ~10 core components are built and stable. Connect Figma → GitHub → Style Dictionary → CSS.</td></tr>
         <tr><td class="token-name" style="color:var(--text-dim)">6</td><td class="token-desc" style="font-weight:600;color:var(--text)">Phase 2 — intent aliases</td><td class="token-desc">Once scale is adopted: <code style="font-family:var(--mono);font-size:11px;color:#0055aa;background:#f0f0f2;padding:1px 5px;border-radius:3px">--space-inset: var(--spacing-m)</code>. Second pass, not blocking adoption.</td></tr>
       </tbody>
     </table>
   </section>
-
 </main>
 </div>
 
 <script>
-// ── DATA ─────────────────────────────────────────────────────────────
 const spacing = [
-  { token: 'spacing/XXXS', css: '--spacing-xxxs', exp: 4,  com: 2  },
-  { token: 'spacing/XXS',  css: '--spacing-xxs',  exp: 8,  com: 4  },
-  { token: 'spacing/XS',   css: '--spacing-xs',   exp: 12, com: 8  },
-  { token: 'spacing/S',    css: '--spacing-s',     exp: 16, com: 12 },
-  { token: 'spacing/M',    css: '--spacing-m',     exp: 24, com: 16 },
-  { token: 'spacing/L',    css: '--spacing-l',     exp: 32, com: 24 },
-  { token: 'spacing/XL',   css: '--spacing-xl',    exp: 40, com: 32 },
-  { token: 'spacing/XXL',  css: '--spacing-xxl',   exp: 56, com: 40 },
-  { token: 'spacing/XXXL', css: '--spacing-xxxl',  exp: 80, com: 48 },
+  { token: 'spacing/XXXS', cssExp: '--spacing-xxxs',  cssCom: '--spacing-xxxs-compact',  exp: 4,  com: 2  },
+  { token: 'spacing/XXS',  cssExp: '--spacing-xxs',   cssCom: '--spacing-xxs-compact',   exp: 8,  com: 4  },
+  { token: 'spacing/XS',   cssExp: '--spacing-xs',    cssCom: '--spacing-xs-compact',    exp: 12, com: 8  },
+  { token: 'spacing/S',    cssExp: '--spacing-s',     cssCom: '--spacing-s-compact',     exp: 16, com: 12 },
+  { token: 'spacing/M',    cssExp: '--spacing-m',     cssCom: '--spacing-m-compact',     exp: 24, com: 16 },
+  { token: 'spacing/L',    cssExp: '--spacing-l',     cssCom: '--spacing-l-compact',     exp: 32, com: 24 },
+  { token: 'spacing/XL',   cssExp: '--spacing-xl',    cssCom: '--spacing-xl-compact',    exp: 40, com: 32 },
+  { token: 'spacing/XXL',  cssExp: '--spacing-xxl',   cssCom: '--spacing-xxl-compact',   exp: 56, com: 40 },
+  { token: 'spacing/XXXL', cssExp: '--spacing-xxxl',  cssCom: '--spacing-xxxl-compact',  exp: 80, com: 48 },
 ];
 
 const fontSizes = [
-  { token: 'font-size/title',   css: '--font-size-title',   exp: 96, com: 56,  sample: 'Display' },
-  { token: 'font-size/h1',      css: '--font-size-h1',      exp: 64, com: 40,  sample: 'Heading 1' },
-  { token: 'font-size/h2',      css: '--font-size-h2',      exp: 48, com: 32,  sample: 'Heading 2' },
-  { token: 'font-size/h3',      css: '--font-size-h3',      exp: 32, com: 24,  sample: 'Heading 3' },
-  { token: 'font-size/h4',      css: '--font-size-h4',      exp: 24, com: 20,  sample: 'Heading 4' },
-  { token: 'font-size/h5',      css: '--font-size-h5',      exp: 20, com: 18,  sample: 'Heading 5' },
-  { token: 'font-size/body-lg', css: '--font-size-body-lg', exp: 18, com: 16,  sample: 'Body large — lorem ipsum dolor' },
-  { token: 'font-size/body',    css: '--font-size-body',    exp: 16, com: 15,  sample: 'Body — lorem ipsum dolor sit amet' },
-  { token: 'font-size/body-sm', css: '--font-size-body-sm', exp: 14, com: 13,  sample: 'Body small — lorem ipsum dolor sit' },
-  { token: 'font-size/caption', css: '--font-size-caption', exp: 12, com: 11,  sample: 'Caption — all the fine print' },
+  { token: 'font-size/title',   css: '--font-size-title',   exp: 96, com: 56, sample: 'Display' },
+  { token: 'font-size/h1',      css: '--font-size-h1',      exp: 64, com: 40, sample: 'Heading 1' },
+  { token: 'font-size/h2',      css: '--font-size-h2',      exp: 48, com: 32, sample: 'Heading 2' },
+  { token: 'font-size/h3',      css: '--font-size-h3',      exp: 32, com: 24, sample: 'Heading 3' },
+  { token: 'font-size/h4',      css: '--font-size-h4',      exp: 24, com: 20, sample: 'Heading 4' },
+  { token: 'font-size/h5',      css: '--font-size-h5',      exp: 20, com: 18, sample: 'Heading 5' },
+  { token: 'font-size/body-lg', css: '--font-size-body-lg', exp: 18, com: 16, sample: 'Body large — lorem ipsum dolor' },
+  { token: 'font-size/body',    css: '--font-size-body',    exp: 16, com: 15, sample: 'Body — lorem ipsum dolor sit amet' },
+  { token: 'font-size/body-sm', css: '--font-size-body-sm', exp: 14, com: 13, sample: 'Body small — lorem ipsum dolor sit' },
+  { token: 'font-size/caption', css: '--font-size-caption', exp: 12, com: 11, sample: 'Caption — all the fine print' },
 ];
 
 const fontFamilies = {
-  adr:  { heading: 'DIN Condensed', body: 'DM Sans',    display: 'Monologue' },
-  exoz: { heading: 'Figtree',       body: 'Figtree',    display: 'Figtree' },
-  rb:   { heading: 'Bennet Display',body: 'Inter',      display: 'Bennet Display' },
-  la:   { heading: 'Open Sans',     body: 'Inter',      display: 'Open Sans' },
-  base: { heading: 'Inter',         body: 'Inter',      display: 'Inter' },
+  adr:  { heading: 'DIN Condensed',   body: 'DM Sans',  display: 'Monologue' },
+  exoz: { heading: 'Figtree',         body: 'Figtree',  display: 'Figtree' },
+  rb:   { heading: 'Bennet Display',  body: 'Inter',    display: 'Bennet Display' },
+  la:   { heading: 'Open Sans',       body: 'Inter',    display: 'Open Sans' },
+  base: { heading: 'Inter',           body: 'Inter',    display: 'Inter' },
 };
 
 const colours = {
-  adr: {
-    'surface/page':          'FFFFFF', 'surface/card':          'FFFFFF',
-    'surface/brand':         '70EDFF', 'surface/brand-dark':    '1E1E1E',
-    'surface/overlay':       '1E1E1E', 'text/primary':          '1E1E1E',
-    'text/secondary':        '6B6B6B', 'text/inverse':          'FFFFFF',
-    'text/brand':            '70EDFF', 'text/on-surface-brand': '1E1E1E',
-    'border/primary':        'FF6F1C', 'border/default':        'CBCBCB',
-    'feedback/success-bg':   'E0F7E0', 'feedback/success':      '2CA02C',
-    'feedback/error-bg':     'FCE0E0', 'feedback/error':        'DC322F',
-    'state/brand-hover':     '4AD8F0', 'state/focus':           '70EDFF',
-    'state/disabled-bg':     'F5F5F5', 'state/disabled-text':   '888888',
-  },
-  exoz: {
-    'surface/page':          'FFFFFF', 'surface/card':          'FFFFFF',
-    'surface/brand':         'FAC532', 'surface/brand-dark':    '1A1A1A',
-    'surface/overlay':       '1A1A1A', 'text/primary':          '1A1A1A',
-    'text/secondary':        '555555', 'text/inverse':          'FFFFFF',
-    'text/brand':            '1A1A1A', 'text/on-surface-brand': '1A1A1A',
-    'border/primary':        'FAC532', 'border/default':        'CBCBCB',
-    'feedback/success-bg':   'E0F7E0', 'feedback/success':      '2CA02C',
-    'feedback/error-bg':     'FCE0E0', 'feedback/error':        'DC322F',
-    'state/brand-hover':     'D4A200', 'state/focus':           'FAC532',
-    'state/disabled-bg':     'F5F5F5', 'state/disabled-text':   '888888',
-  },
-  rb: {
-    'surface/page':          'FCF8F8', 'surface/card':          'FFFFFF',
-    'surface/brand':         'EE3124', 'surface/brand-dark':    '401410',
-    'surface/overlay':       '000000', 'text/primary':          '262626',
-    'text/secondary':        '666666', 'text/inverse':          'FFFFFF',
-    'text/brand':            'EE3124', 'text/on-surface-brand': 'FFFFFF',
-    'border/primary':        'EE3124', 'border/default':        'CBCBCB',
-    'feedback/success-bg':   'E0F7E0', 'feedback/success':      '2CA02C',
-    'feedback/error-bg':     'FCE0E0', 'feedback/error':        'DC322F',
-    'state/brand-hover':     'C42518', 'state/focus':           'EE3124',
-    'state/disabled-bg':     'F5F5F5', 'state/disabled-text':   '888888',
-  },
-  la: {
-    'surface/page':          'FFFFFF', 'surface/card':          'FFFFFF',
-    'surface/brand':         'EB3300', 'surface/brand-dark':    '313131',
-    'surface/overlay':       '313131', 'text/primary':          '313131',
-    'text/secondary':        '878787', 'text/inverse':          'FFFFFF',
-    'text/brand':            'EB3300', 'text/on-surface-brand': 'FFFFFF',
-    'border/primary':        'EB3300', 'border/default':        'CBCBCB',
-    'feedback/success-bg':   'E0F7E0', 'feedback/success':      '2CA02C',
-    'feedback/error-bg':     'FCE0E0', 'feedback/error':        'DC322F',
-    'state/brand-hover':     'C22A00', 'state/focus':           'EB3300',
-    'state/disabled-bg':     'F5F5F5', 'state/disabled-text':   '888888',
-  },
-  base: {
-    'surface/page':          'FFFFFF', 'surface/card':          'FFFFFF',
-    'surface/brand':         '222226', 'surface/brand-dark':    '111113',
-    'surface/overlay':       '111111', 'text/primary':          '111111',
-    'text/secondary':        '666666', 'text/inverse':          'FFFFFF',
-    'text/brand':            '222226', 'text/on-surface-brand': 'FFFFFF',
-    'border/primary':        '222226', 'border/default':        'CBCBCB',
-    'feedback/success-bg':   'E0F7E0', 'feedback/success':      '2CA02C',
-    'feedback/error-bg':     'FCE0E0', 'feedback/error':        'DC322F',
-    'state/brand-hover':     '3A3A3F', 'state/focus':           '222226',
-    'state/disabled-bg':     'F5F5F5', 'state/disabled-text':   '888888',
-  },
+  adr:  { 'surface/page':'FFFFFF','surface/card':'FFFFFF','surface/brand':'70EDFF','surface/brand-dark':'1E1E1E','surface/overlay':'1E1E1E','text/primary':'1E1E1E','text/secondary':'6B6B6B','text/inverse':'FFFFFF','text/brand':'70EDFF','text/on-surface-brand':'1E1E1E','border/primary':'FF6F1C','border/default':'CBCBCB','feedback/success-bg':'E0F7E0','feedback/success':'2CA02C','feedback/error-bg':'FCE0E0','feedback/error':'DC322F','state/brand-hover':'4AD8F0','state/focus':'70EDFF','state/disabled-bg':'F5F5F5','state/disabled-text':'888888' },
+  exoz: { 'surface/page':'FFFFFF','surface/card':'FFFFFF','surface/brand':'FAC532','surface/brand-dark':'1A1A1A','surface/overlay':'1A1A1A','text/primary':'1A1A1A','text/secondary':'555555','text/inverse':'FFFFFF','text/brand':'1A1A1A','text/on-surface-brand':'1A1A1A','border/primary':'FAC532','border/default':'CBCBCB','feedback/success-bg':'E0F7E0','feedback/success':'2CA02C','feedback/error-bg':'FCE0E0','feedback/error':'DC322F','state/brand-hover':'D4A200','state/focus':'FAC532','state/disabled-bg':'F5F5F5','state/disabled-text':'888888' },
+  rb:   { 'surface/page':'FCF8F8','surface/card':'FFFFFF','surface/brand':'EE3124','surface/brand-dark':'401410','surface/overlay':'000000','text/primary':'262626','text/secondary':'666666','text/inverse':'FFFFFF','text/brand':'EE3124','text/on-surface-brand':'FFFFFF','border/primary':'EE3124','border/default':'CBCBCB','feedback/success-bg':'E0F7E0','feedback/success':'2CA02C','feedback/error-bg':'FCE0E0','feedback/error':'DC322F','state/brand-hover':'C42518','state/focus':'EE3124','state/disabled-bg':'F5F5F5','state/disabled-text':'888888' },
+  la:   { 'surface/page':'FFFFFF','surface/card':'FFFFFF','surface/brand':'EB3300','surface/brand-dark':'313131','surface/overlay':'313131','text/primary':'313131','text/secondary':'878787','text/inverse':'FFFFFF','text/brand':'EB3300','text/on-surface-brand':'FFFFFF','border/primary':'EB3300','border/default':'CBCBCB','feedback/success-bg':'E0F7E0','feedback/success':'2CA02C','feedback/error-bg':'FCE0E0','feedback/error':'DC322F','state/brand-hover':'C22A00','state/focus':'EB3300','state/disabled-bg':'F5F5F5','state/disabled-text':'888888' },
+  base: { 'surface/page':'FFFFFF','surface/card':'FFFFFF','surface/brand':'222226','surface/brand-dark':'111113','surface/overlay':'111111','text/primary':'111111','text/secondary':'666666','text/inverse':'FFFFFF','text/brand':'222226','text/on-surface-brand':'FFFFFF','border/primary':'222226','border/default':'CBCBCB','feedback/success-bg':'E0F7E0','feedback/success':'2CA02C','feedback/error-bg':'FCE0E0','feedback/error':'DC322F','state/brand-hover':'3A3A3F','state/focus':'222226','state/disabled-bg':'F5F5F5','state/disabled-text':'888888' },
 };
 
 const radius = [
@@ -595,89 +720,84 @@ const radius = [
   { token: 'radius/md',   css: '--radius-md',   val: '8px' },
   { token: 'radius/lg',   css: '--radius-lg',   val: '12px' },
   { token: 'radius/xl',   css: '--radius-xl',   val: '16px' },
-  { token: 'radius/full', css: '--radius-full',  val: '9999px' },
+  { token: 'radius/full', css: '--radius-full', val: '9999px' },
 ];
 
-// ── STATE ─────────────────────────────────────────────────────────────
 let bpMode = 'expanded';
 let typoBp = 'expanded';
 let typoBrand = 'adr';
 let colourBrand = 'adr';
 let cssBrand = 'adr';
 
-// ── RENDER SPACING ────────────────────────────────────────────────────
 function renderSpacing() {
   const tbody = document.getElementById('spacing-tbody');
+  const isCompact = bpMode === 'compact';
   tbody.innerHTML = spacing.map(s => {
-    const val = bpMode === 'expanded' ? s.exp : s.com;
+    const val = isCompact ? s.com : s.exp;
+    const cssVar = isCompact ? s.cssCom : s.cssExp;
     const barW = Math.min(val * 2.2, 200);
     return `<tr>
-      <td class="token-name">${s.token}<button class="copy-btn" onclick="copyToken('${s.css}',this)">copy</button></td>
-      <td class="token-css">${s.css}</td>
+      <td class="token-name">${s.token}<button class="copy-btn" onclick="copyToken('${cssVar}',this)">copy</button></td>
+      <td class="token-css">${cssVar}${isCompact ? '<span class="compact-note">compact</span>' : ''}</td>
       <td class="token-val">${val}px</td>
-      <td style="padding:10px 12px">
-        <div class="spacing-bar">
-          <div class="spacing-vis" style="width:${barW}px"></div>
-        </div>
-      </td>
+      <td style="padding:10px 12px"><div class="spacing-bar"><div class="spacing-vis" style="width:${barW}px"></div></div></td>
     </tr>`;
   }).join('');
 }
 
-// ── RENDER TYPOGRAPHY ─────────────────────────────────────────────────
 function renderTypo() {
-  const tbody = document.getElementById('typo-tbody');
   const ff = fontFamilies[typoBrand];
-  tbody.innerHTML = fontSizes.map(f => {
-    const val = typoBp === 'expanded' ? f.exp : f.com;
-    const isHeading = f.token.includes('h1') || f.token.includes('h2') || f.token.includes('h3') || f.token.includes('title');
-    const family = isHeading ? ff.heading : ff.body;
-    return `<tr>
-      <td class="token-name">${f.token}<button class="copy-btn" onclick="copyToken('${f.css}',this)">copy</button></td>
-      <td class="token-css">${f.css}</td>
-      <td style="padding:6px 12px"><div class="type-sample" style="font-size:${Math.min(val,32)}px;font-family:'${family}',sans-serif;white-space:nowrap;overflow:hidden;max-width:260px;text-overflow:ellipsis">${f.sample}</div></td>
-      <td style="padding:10px 12px;text-align:right"><span style="font-family:var(--mono);font-size:12px;color:#1a7a1a">${val}px</span></td>
-    </tr>`;
-  }).join('');
+  const brandLabel = {adr:'Adrenaline',exoz:'ExperienceOz',rb:'RedBalloon',la:'Local Agent',base:'Base'}[typoBrand];
 
-  // Font families
-  const ffTbody = document.getElementById('fontfamily-tbody');
-  document.getElementById('ff-brand-label').textContent = {adr:'Adrenaline',exoz:'ExperienceOz',rb:'RedBalloon',la:'Local Agent',base:'Base'}[typoBrand];
-  ffTbody.innerHTML = [
-    ['font/heading', '--font-family-heading', ff.heading],
-    ['font/body',    '--font-family-body',    ff.body],
-    ['font/display', '--font-family-display', ff.display],
-  ].map(([t, c, v]) => `<tr>
+  // Tier 1 — font family & weight tokens (live in storefronts now)
+  document.getElementById('ff-brand-label').textContent = brandLabel + ' value';
+  const ffRows = [
+    ['font/heading',           '--font-family-heading',  ff.heading,   'Heading font family'],
+    ['font/body',              '--font-family-body',     ff.body,      'Body font family'],
+    ['font/display',           '--font-family-display',  ff.display,   'Display / hero font family'],
+    ['font/weight-light',      '--font-weight-light',    '300',        'Light weight'],
+    ['font/weight-regular',    '--font-weight-regular',  '400',        'Regular weight'],
+    ['font/weight-medium',     '--font-weight-medium',   '500',        'Medium weight'],
+    ['font/weight-semibold',   '--font-weight-semibold', '600',        'Semibold weight'],
+    ['font/weight-bold',       '--font-weight-bold',     '700',        'Bold weight'],
+    ['font/heading-weight',    '--font-heading-weight',  ff.headingWeight || '700', 'Default heading weight'],
+  ];
+  document.getElementById('fontfamily-tbody').innerHTML = ffRows.map(([t,c,v,desc]) => `<tr>
     <td class="token-name">${t}<button class="copy-btn" onclick="copyToken('${c}',this)">copy</button></td>
     <td class="token-css">${c}</td>
     <td class="token-val">${v}</td>
   </tr>`).join('');
+
+  // Tier 2 — font size tokens (v2 proposed)
+  const tbody = document.getElementById('typo-tbody');
+  tbody.innerHTML = fontSizes.map(f => {
+    const val = typoBp === 'expanded' ? f.exp : f.com;
+    const isHeading = f.token.includes('h1') || f.token.includes('h2') || f.token.includes('h3') || f.token.includes('title');
+    const family = isHeading ? ff.heading : ff.body;
+    return `<tr class="proposed">
+      <td class="token-name">${f.token}<button class="copy-btn" onclick="copyToken('${f.css}',this)">copy</button></td>
+      <td class="token-css">${f.css}<span class="v2-badge">v2</span></td>
+      <td style="padding:6px 12px"><div class="type-sample" style="font-size:${Math.min(val,32)}px;font-family:'${family}',sans-serif;white-space:nowrap;overflow:hidden;max-width:260px;text-overflow:ellipsis;opacity:0.85">${f.sample}</div></td>
+      <td style="padding:10px 12px;text-align:right"><span style="font-family:var(--mono);font-size:12px;color:#1a7a1a">${val}px</span></td>
+    </tr>`;
+  }).join('');
 }
 
-// ── RENDER COLOUR ─────────────────────────────────────────────────────
 function renderColour() {
   const tbody = document.getElementById('colour-tbody');
   const brand = colours[colourBrand];
   tbody.innerHTML = Object.entries(brand).map(([token, hex]) => {
     const cssName = '--' + token.replace(/\//g, '-');
-    const isDark = parseInt(hex.slice(0,2),16)*0.299 + parseInt(hex.slice(2,4),16)*0.587 + parseInt(hex.slice(4,6),16)*0.114 < 128;
     return `<tr>
       <td class="token-name">${token}<button class="copy-btn" onclick="copyToken('${cssName}',this)">copy</button></td>
       <td class="token-css">${cssName}</td>
-      <td>
-        <div class="swatch-row">
-          <div class="swatch" style="background:#${hex}"></div>
-          <span class="swatch-hex">#${hex}</span>
-        </div>
-      </td>
+      <td><div class="swatch-row"><div class="swatch" style="background:#${hex}"></div><span class="swatch-hex">#${hex}</span></div></td>
     </tr>`;
   }).join('');
 }
 
-// ── RENDER RADIUS ─────────────────────────────────────────────────────
 function renderRadius() {
   const grid = document.getElementById('radius-grid');
-  const radMap = {none:0, sm:4, md:8, lg:12, xl:16, full:9999};
   grid.innerHTML = radius.map(r => {
     const px = parseInt(r.val) || 0;
     const br = Math.min(px, 24);
@@ -686,7 +806,6 @@ function renderRadius() {
       <div class="radius-label"><div style="color:#0055aa">${r.token.split('/')[1]}</div><div style="color:#1a7a1a;margin-top:2px">${r.val}</div></div>
     </div>`;
   }).join('');
-
   const tbody = document.getElementById('radius-tbody');
   tbody.innerHTML = radius.map(r => `<tr>
     <td class="token-name">${r.token}<button class="copy-btn" onclick="copyToken('${r.css}',this)">copy</button></td>
@@ -695,38 +814,45 @@ function renderRadius() {
   </tr>`).join('');
 }
 
-// ── RENDER CSS OUTPUT ─────────────────────────────────────────────────
 function renderCssOutput() {
   const brand = cssBrand;
   const c = colours[brand];
   const ff = fontFamilies[brand];
   const brandClass = {adr:'brand-adrenaline',exoz:'brand-experienceoz',rb:'brand-redballoon',la:'brand-localagent',base:'brand-base'}[brand];
   document.getElementById('css-label').textContent = `${brandClass}.css`;
-
   const lines = [
     `<span class="cmt">/* ─── BRG Design System · ${brandClass} ─── */</span>`,
     ``,
-    `<span class="cmt">/* Spacing scale — Expanded (desktop) */</span>`,
+    `<span class="cmt">/* Spacing — desktop (Expanded) */</span>`,
     `<span class="sel">:root</span> {`,
-    ...spacing.map(s => `  <span class="prop">${s.css}</span>: <span class="val">${s.exp}px</span>;`),
+    ...spacing.map(s => `  <span class="prop">${s.cssExp}</span>: <span class="val">${s.exp}px</span>;`),
     `}`,
     ``,
-    `<span class="cmt">/* Spacing scale — Compact (mobile ≤768px) */</span>`,
+    `<span class="cmt">/* Spacing — mobile (Compact) — opt-in per component */</span>`,
+    `<span class="sel">:root</span> {`,
+    ...spacing.map(s => `  <span class="prop">${s.cssCom}</span>: <span class="val">${s.com}px</span>;`),
+    `}`,
+    ``,
+    `<span class="cmt">/* Usage pattern during migration: */</span>`,
+    `<span class="cmt">/* .card { padding: var(--spacing-m); }              */</span>`,
+    `<span class="cmt">/* @media (max-width: 768px) {                       */</span>`,
+    `<span class="cmt">/*   .card { padding: var(--spacing-m-compact); }    */</span>`,
+    `<span class="cmt">/* }                                                 */</span>`,
+    ``,
+    `<span class="cmt">/* ─────────────────────────────────────────────── */</span>`,
+    `<span class="cmt">/* Font sizes — v2 PROPOSED                        */</span>`,
+    `<span class="cmt">/* Requires heading component refactor before use  */</span>`,
+    `<span class="cmt">/* ─────────────────────────────────────────────── */</span>`,
+    ``,
+    `<span class="cmt">/* Font sizes — Expanded (v2) */</span>`,
+    `<span class="sel">:root</span> {`,
+    ...fontSizes.map(f => `  <span class="prop">${f.css}</span>: <span class="val">${f.exp}px</span>; <span class="cmt">/* v2 */</span>`),
+    `}`,
+    ``,
+    `<span class="cmt">/* Font sizes — Compact (v2) */</span>`,
     `<span class="kw">@media</span> (max-width: 768px) {`,
     `  <span class="sel">:root</span> {`,
-    ...spacing.map(s => `    <span class="prop">${s.css}</span>: <span class="val">${s.com}px</span>;`),
-    `  }`,
-    `}`,
-    ``,
-    `<span class="cmt">/* Font sizes — Expanded */</span>`,
-    `<span class="sel">:root</span> {`,
-    ...fontSizes.map(f => `  <span class="prop">${f.css}</span>: <span class="val">${f.exp}px</span>;`),
-    `}`,
-    ``,
-    `<span class="cmt">/* Font sizes — Compact */</span>`,
-    `<span class="kw">@media</span> (max-width: 768px) {`,
-    `  <span class="sel">:root</span> {`,
-    ...fontSizes.map(f => `    <span class="prop">${f.css}</span>: <span class="val">${f.com}px</span>;`),
+    ...fontSizes.map(f => `    <span class="prop">${f.css}</span>: <span class="val">${f.com}px</span>; <span class="cmt">/* v2 */</span>`),
     `  }`,
     `}`,
     ``,
@@ -739,46 +865,39 @@ function renderCssOutput() {
     `  <span class="prop">--font-family-display</span>: <span class="val">'${ff.display}', sans-serif</span>;`,
     `}`,
   ];
-
   document.getElementById('css-output-pre').innerHTML = lines.join('\n');
 }
 
-// ── HANDLERS ──────────────────────────────────────────────────────────
 function setBreakpoint(mode, btn) {
   bpMode = mode;
   document.querySelectorAll('.bp-toggle .bp-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   renderSpacing();
 }
-
 function setTypoBp(mode, btn) {
   typoBp = mode;
   btn.closest('.bp-toggle').querySelectorAll('.bp-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   renderTypo();
 }
-
 function setBrand(brand, btn) {
   typoBrand = brand;
   btn.closest('.brand-bar').querySelectorAll('.brand-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   renderTypo();
 }
-
 function setColourBrand(brand, btn) {
   colourBrand = brand;
   btn.closest('.brand-bar').querySelectorAll('.brand-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   renderColour();
 }
-
 function setCssBrand(brand, btn) {
   cssBrand = brand;
   btn.closest('.brand-bar').querySelectorAll('.brand-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   renderCssOutput();
 }
-
 function copyToken(text, btn) {
   navigator.clipboard.writeText(text).then(() => {
     btn.textContent = '✓';
@@ -786,7 +905,6 @@ function copyToken(text, btn) {
     setTimeout(() => { btn.textContent = 'copy'; btn.classList.remove('copied'); }, 1500);
   });
 }
-
 function copyAllCss(btn) {
   const pre = document.getElementById('css-output-pre');
   const text = pre.innerText || pre.textContent;
@@ -797,7 +915,6 @@ function copyAllCss(btn) {
   });
 }
 
-// ── SCROLL SPY ────────────────────────────────────────────────────────
 const sections = document.querySelectorAll('section[id]');
 const navLinks = document.querySelectorAll('nav a');
 const observer = new IntersectionObserver(entries => {
@@ -811,7 +928,6 @@ const observer = new IntersectionObserver(entries => {
 }, { threshold: 0.3 });
 sections.forEach(s => observer.observe(s));
 
-// ── INIT ──────────────────────────────────────────────────────────────
 renderSpacing();
 renderTypo();
 renderColour();
