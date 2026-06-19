@@ -121,7 +121,29 @@ pre { padding: 20px; font-family: var(--mono); font-size: 12px; line-height: 1.8
 /* Muted row for proposed tokens */
 .token-table tr.proposed td { opacity: 0.75; }
 .impl-note strong { color: #0044aa; }
-section { scroll-margin-top: 32px; }
+/* Changelog filter buttons */
+.cl-filter { padding:4px 12px;border:1px solid var(--border);border-radius:20px;background:transparent;color:var(--text-muted);font-size:11px;font-weight:600;cursor:pointer;font-family:var(--sans);transition:all 0.15s;white-space:nowrap; }
+.cl-filter:hover { border-color:var(--border-hover);color:var(--text); }
+.cl-filter.active { background:var(--surface-2);border-color:var(--border-hover);color:var(--text); }
+/* Week accordion */
+.cl-week { border:1px solid var(--border);border-radius:8px;overflow:hidden; }
+.cl-week-header { display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--surface);cursor:pointer;user-select:none;gap:12px; }
+.cl-week-header:hover { background:var(--surface-2); }
+.cl-week-title { display:flex;align-items:center;gap:10px;flex:1;min-width:0; }
+.cl-week-date { font-family:var(--mono);font-size:11px;color:var(--text-dim);white-space:nowrap; }
+.cl-week-label { font-size:12px;font-weight:700;color:var(--text); }
+.cl-week-meta { display:flex;gap:6px;align-items:center;flex-shrink:0; }
+.cl-count { font-size:10px;color:var(--text-dim);font-family:var(--mono); }
+.cl-chevron { font-size:10px;color:var(--text-dim);transition:transform 0.2s;flex-shrink:0; }
+.cl-week.open .cl-chevron { transform:rotate(180deg); }
+.cl-week-body { display:none;border-top:1px solid var(--border); }
+.cl-week.open .cl-week-body { display:block; }
+/* Change row */
+.cl-row { display:grid;grid-template-columns:120px 1fr 90px;gap:0;border-bottom:1px solid var(--border);align-items:start; }
+.cl-row:last-child { border-bottom:none; }
+.cl-row-area { padding:9px 12px;font-size:11px;font-weight:700;color:var(--text-muted);white-space:nowrap;border-right:1px solid var(--border); }
+.cl-row-change { padding:9px 12px;font-size:12px;color:var(--text-muted);line-height:1.6; }
+.cl-row-type { padding:9px 12px;display:flex;align-items:flex-start;justify-content:flex-end;border-left:1px solid var(--border); }
 @media (max-width: 768px) {
   .shell { grid-template-columns: 1fr; }
   nav { position: relative; height: auto; }
@@ -322,7 +344,14 @@ section { scroll-margin-top: 32px; }
       <span class="section-num">04</span>
       <span class="section-title">Radius</span>
     </div>
-    <p class="section-desc">Semantic/Radius · same scale across all brands · values differ per brand for default radius.</p>
+    <p class="section-desc">Semantic/Mapped · same token names across all brands · values differ per brand. Adrenaline and Local Agent use a sharper (smaller) scale.</p>
+    <div class="brand-bar">
+      <button class="brand-btn active" data-brand="base" onclick="setRadiusBrand('base', this)">Base</button>
+      <button class="brand-btn" data-brand="adr" onclick="setRadiusBrand('adr', this)">Adrenaline</button>
+      <button class="brand-btn" data-brand="exoz" onclick="setRadiusBrand('exoz', this)">ExperienceOz</button>
+      <button class="brand-btn" data-brand="rb" onclick="setRadiusBrand('rb', this)">RedBalloon</button>
+      <button class="brand-btn" data-brand="la" onclick="setRadiusBrand('la', this)">Local Agent</button>
+    </div>
     <div class="radius-grid" id="radius-grid"></div>
     <div style="margin-top:24px">
       <table class="token-table">
@@ -439,58 +468,30 @@ section { scroll-margin-top: 32px; }
       <span class="section-num">09</span>
       <span class="section-title">Changelog</span>
     </div>
-    <p class="section-desc">A record of all design system changes. Most recent first.</p>
+    <p class="section-desc">All design system changes grouped by week. Filter by type or area — weeks collapse to keep it scannable.</p>
 
-    <div style="display:flex;flex-direction:column;gap:24px;margin-top:8px">
-
-      <!-- Entry -->
-      <div style="border:1px solid var(--border);border-radius:10px;overflow:hidden">
-        <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:var(--surface);border-bottom:1px solid var(--border)">
-          <div style="display:flex;align-items:center;gap:10px">
-            <span style="font-family:var(--mono);font-size:12px;color:var(--text-muted)">19 Jun 2026</span>
-            <span style="font-size:12px;font-weight:700;color:var(--text)">Spacing scale alignment + typography split</span>
-          </div>
-          <span style="font-size:11px;font-weight:600;color:#0055aa;background:rgba(0,102,204,0.07);border:1px solid rgba(0,102,204,0.18);border-radius:4px;padding:2px 8px">Foundation</span>
-        </div>
-        <div style="padding:16px">
-          <table class="token-table" style="margin:0">
-            <thead><tr>
-              <th style="width:140px">Area</th>
-              <th>Change</th>
-              <th style="width:100px">Type</th>
-            </tr></thead>
-            <tbody>
-              <tr>
-                <td class="token-desc" style="font-weight:600;color:var(--text);white-space:nowrap">Primitives</td>
-                <td class="token-desc">Removed <code style="font-family:var(--mono);font-size:11px;background:#f0f0f2;padding:1px 5px;border-radius:3px">spacing/48</code> and <code style="font-family:var(--mono);font-size:11px;background:#f0f0f2;padding:1px 5px;border-radius:3px">spacing/64</code> — not in Jira dev scale (BAI-10860). Added <code style="font-family:var(--mono);font-size:11px;background:#f0f0f2;padding:1px 5px;border-radius:3px">spacing/12</code> and <code style="font-family:var(--mono);font-size:11px;background:#f0f0f2;padding:1px 5px;border-radius:3px">spacing/56</code> to fill gaps.</td>
-                <td style="padding:10px 12px"><span style="font-size:10px;font-weight:700;color:#7a1a00;background:rgba(204,68,0,0.08);border:1px solid rgba(204,68,0,0.2);border-radius:4px;padding:2px 7px">Breaking</span></td>
-              </tr>
-              <tr>
-                <td class="token-desc" style="font-weight:600;color:var(--text);white-space:nowrap">Semantic/Layout</td>
-                <td class="token-desc">Added WEB code syntax to all 9 spacing tokens — now shows correct CSS var name in Figma inspector and Token Studio export (e.g. <code style="font-family:var(--mono);font-size:11px;background:#f0f0f2;padding:1px 5px;border-radius:3px">--spacing-m</code>).</td>
-                <td style="padding:10px 12px"><span style="font-size:10px;font-weight:700;color:#1a5a00;background:rgba(26,122,26,0.08);border:1px solid rgba(26,122,26,0.2);border-radius:4px;padding:2px 7px">Additive</span></td>
-              </tr>
-              <tr>
-                <td class="token-desc" style="font-weight:600;color:var(--text);white-space:nowrap">Token ref site</td>
-                <td class="token-desc">Compact tab now shows <code style="font-family:var(--mono);font-size:11px;background:#f0f0f2;padding:1px 5px;border-radius:3px">--spacing-m-compact</code> naming in the CSS column — matches dev's flat two-variable migration approach. Copy button copies the correct compact var name.</td>
-                <td style="padding:10px 12px"><span style="font-size:10px;font-weight:700;color:#1a5a00;background:rgba(26,122,26,0.08);border:1px solid rgba(26,122,26,0.2);border-radius:4px;padding:2px 7px">Additive</span></td>
-              </tr>
-              <tr>
-                <td class="token-desc" style="font-weight:600;color:var(--text);white-space:nowrap">Token ref site</td>
-                <td class="token-desc">CSS output section updated — shows both <code style="font-family:var(--mono);font-size:11px;background:#f0f0f2;padding:1px 5px;border-radius:3px">--spacing-m</code> (desktop) and <code style="font-family:var(--mono);font-size:11px;background:#f0f0f2;padding:1px 5px;border-radius:3px">--spacing-m-compact</code> (mobile) with a commented usage pattern for component-level opt-in.</td>
-                <td style="padding:10px 12px"><span style="font-size:10px;font-weight:700;color:#004a7a;background:rgba(0,102,204,0.07);border:1px solid rgba(0,102,204,0.18);border-radius:4px;padding:2px 7px">Update</span></td>
-              </tr>
-              <tr>
-                <td class="token-desc" style="font-weight:600;color:var(--text);white-space:nowrap">Token ref site</td>
-                <td class="token-desc">Typography section split into two tiers. <strong>Tier 1 (live):</strong> font family + weight tokens already in storefronts — <code style="font-family:var(--mono);font-size:11px;background:#f0f0f2;padding:1px 5px;border-radius:3px">--font-family-*</code>, <code style="font-family:var(--mono);font-size:11px;background:#f0f0f2;padding:1px 5px;border-radius:3px">--font-weight-*</code>, <code style="font-family:var(--mono);font-size:11px;background:#f0f0f2;padding:1px 5px;border-radius:3px">--font-heading-weight</code>. <strong>Tier 2 (v2 proposed):</strong> font-size scale tokens badged as proposed — blocked by heading component refactor (~1,024 refs, 366 files).</td>
-                <td style="padding:10px 12px"><span style="font-size:10px;font-weight:700;color:#004a7a;background:rgba(0,102,204,0.07);border:1px solid rgba(0,102,204,0.18);border-radius:4px;padding:2px 7px">Update</span></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+    <!-- Controls -->
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;align-items:center">
+      <input id="cl-search" type="text" placeholder="Search changes…" oninput="renderChangelog()"
+        style="padding:6px 12px;border:1px solid var(--border);border-radius:6px;font-size:12px;font-family:var(--sans);color:var(--text);background:var(--bg);width:200px;outline:none">
+      <div style="display:flex;gap:4px;flex-wrap:wrap" id="cl-type-filters">
+        <button class="cl-filter active" data-filter="all" onclick="setCLFilter('all',this)">All</button>
+        <button class="cl-filter" data-filter="Breaking" onclick="setCLFilter('Breaking',this)">Breaking</button>
+        <button class="cl-filter" data-filter="Additive" onclick="setCLFilter('Additive',this)">Additive</button>
+        <button class="cl-filter" data-filter="Update" onclick="setCLFilter('Update',this)">Update</button>
       </div>
-
+      <div style="display:flex;gap:4px;flex-wrap:wrap;margin-left:4px" id="cl-area-filters">
+        <button class="cl-filter cl-area active" data-area="all" onclick="setCLArea('all',this)">All areas</button>
+        <button class="cl-filter cl-area" data-area="Primitives" onclick="setCLArea('Primitives',this)">Primitives</button>
+        <button class="cl-filter cl-area" data-area="Semantic/Layout" onclick="setCLArea('Semantic/Layout',this)">Semantic/Layout</button>
+        <button class="cl-filter cl-area" data-area="Semantic/Mapped" onclick="setCLArea('Semantic/Mapped',this)">Semantic/Mapped</button>
+        <button class="cl-filter cl-area" data-area="Token ref site" onclick="setCLArea('Token ref site',this)">Token ref site</button>
+      </div>
+      <button onclick="expandAllWeeks()" style="margin-left:auto;background:none;border:1px solid var(--border);border-radius:6px;padding:5px 12px;font-size:11px;color:var(--text-muted);cursor:pointer;font-family:var(--sans)">Expand all</button>
     </div>
+
+    <div id="cl-empty" style="display:none;padding:24px;text-align:center;color:var(--text-muted);font-size:13px;border:1px dashed var(--border);border-radius:8px">No changes match your filters.</div>
+    <div id="cl-list" style="display:flex;flex-direction:column;gap:8px"></div>
   </section>
 
   <!-- TOKEN MAPPING -->
@@ -714,14 +715,17 @@ const colours = {
   base: { 'surface/page':'FFFFFF','surface/card':'FFFFFF','surface/brand':'222226','surface/brand-dark':'111113','surface/overlay':'111111','text/primary':'111111','text/secondary':'666666','text/inverse':'FFFFFF','text/brand':'222226','text/on-surface-brand':'FFFFFF','border/primary':'222226','border/default':'CBCBCB','feedback/success-bg':'E0F7E0','feedback/success':'2CA02C','feedback/error-bg':'FCE0E0','feedback/error':'DC322F','state/brand-hover':'3A3A3F','state/focus':'222226','state/disabled-bg':'F5F5F5','state/disabled-text':'888888' },
 };
 
-const radius = [
-  { token: 'radius/none', css: '--radius-none', val: '0' },
-  { token: 'radius/sm',   css: '--radius-sm',   val: '4px' },
-  { token: 'radius/md',   css: '--radius-md',   val: '8px' },
-  { token: 'radius/lg',   css: '--radius-lg',   val: '12px' },
-  { token: 'radius/xl',   css: '--radius-xl',   val: '16px' },
-  { token: 'radius/full', css: '--radius-full', val: '9999px' },
-];
+const radiusData = {
+  'radius/none': { css: '--radius-none',  Base: 0,    Adrenaline: 0,    ExperienceOz: 0,    RedBalloon: 0,    'Local Agent': 0    },
+  'radius/sm':   { css: '--radius-sm',    Base: 4,    Adrenaline: 2,    ExperienceOz: 4,    RedBalloon: 4,    'Local Agent': 4    },
+  'radius/md':   { css: '--radius-md',    Base: 8,    Adrenaline: 4,    ExperienceOz: 8,    RedBalloon: 8,    'Local Agent': 4    },
+  'radius/lg':   { css: '--radius-lg',    Base: 12,   Adrenaline: 8,    ExperienceOz: 12,   RedBalloon: 12,   'Local Agent': 8    },
+  'radius/xl':   { css: '--radius-xl',    Base: 16,   Adrenaline: 12,   ExperienceOz: 16,   RedBalloon: 16,   'Local Agent': 12   },
+  'radius/full': { css: '--radius-full',  Base: 9999, Adrenaline: 9999, ExperienceOz: 9999, RedBalloon: 9999, 'Local Agent': 9999 },
+  'radius/2xl':  { css: '--radius-2xl',   Base: 24,   Adrenaline: 16,   ExperienceOz: 24,   RedBalloon: 24,   'Local Agent': 16   },
+};
+const brandKeyMap = { adr: 'Adrenaline', exoz: 'ExperienceOz', rb: 'RedBalloon', la: 'Local Agent', base: 'Base' };
+let radiusBrand = 'base';
 
 let bpMode = 'expanded';
 let typoBp = 'expanded';
@@ -796,22 +800,41 @@ function renderColour() {
   }).join('');
 }
 
+function setRadiusBrand(brand, btn) {
+  radiusBrand = brand;
+  btn.closest('.brand-bar').querySelectorAll('.brand-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderRadius();
+}
+
 function renderRadius() {
+  const brandKey = brandKeyMap[radiusBrand];
+  const entries = Object.entries(radiusData);
+
   const grid = document.getElementById('radius-grid');
-  grid.innerHTML = radius.map(r => {
-    const px = parseInt(r.val) || 0;
-    const br = Math.min(px, 24);
+  grid.innerHTML = entries.filter(([t]) => t !== 'radius/2xl').map(([token, d]) => {
+    const val = d[brandKey];
+    const name = token.split('/')[1];
+    const br = Math.min(val === 9999 ? 9999 : val, 28);
     return `<div class="radius-item">
       <div class="radius-box" style="border-radius:${br}px"></div>
-      <div class="radius-label"><div style="color:#0055aa">${r.token.split('/')[1]}</div><div style="color:#1a7a1a;margin-top:2px">${r.val}</div></div>
+      <div class="radius-label">
+        <div style="color:#0055aa">${name}</div>
+        <div style="color:#1a7a1a;margin-top:2px">${val === 9999 ? '9999px' : val === 0 ? '0' : val + 'px'}</div>
+      </div>
     </div>`;
   }).join('');
+
   const tbody = document.getElementById('radius-tbody');
-  tbody.innerHTML = radius.map(r => `<tr>
-    <td class="token-name">${r.token}<button class="copy-btn" onclick="copyToken('${r.css}',this)">copy</button></td>
-    <td class="token-css">${r.css}</td>
-    <td class="token-val">${r.val}</td>
-  </tr>`).join('');
+  tbody.innerHTML = entries.map(([token, d]) => {
+    const val = d[brandKey];
+    const display = val === 9999 ? '9999px' : val === 0 ? '0' : val + 'px';
+    return `<tr>
+      <td class="token-name">${token}<button class="copy-btn" onclick="copyToken('${d.css}',this)">copy</button></td>
+      <td class="token-css">${d.css}</td>
+      <td class="token-val">${display}</td>
+    </tr>`;
+  }).join('');
 }
 
 function renderCssOutput() {
@@ -854,6 +877,15 @@ function renderCssOutput() {
     `  <span class="sel">:root</span> {`,
     ...fontSizes.map(f => `    <span class="prop">${f.css}</span>: <span class="val">${f.com}px</span>; <span class="cmt">/* v2 */</span>`),
     `  }`,
+    `}`,
+    ``,
+    `<span class="cmt">/* Radius */</span>`,
+    `<span class="sel">.${brandClass}</span> {`,
+    ...Object.entries(radiusData).map(([token, d]) => {
+      const val = d[brandKeyMap[brand]];
+      const display = val === 9999 ? '9999px' : val === 0 ? '0' : val + 'px';
+      return `  <span class="prop">${d.css}</span>: <span class="val">${display}</span>;`;
+    }),
     `}`,
     ``,
     `<span class="cmt">/* Brand theme — ${brandClass} */</span>`,
@@ -933,6 +965,117 @@ renderTypo();
 renderColour();
 renderRadius();
 renderCssOutput();
+// To add a new week: push a new object to clWeeks (most recent first)
+// Each change: { area, type: 'Breaking'|'Additive'|'Update', text }
+const clWeeks = [
+  {
+    weekOf: 'w/c 16 Jun 2026',
+    label: 'Spacing, typography & radius foundation',
+    changes: [
+      { area: 'Primitives',      type: 'Breaking', text: 'Removed spacing/48 and spacing/64 — not in Jira dev scale (BAI-10860). Added spacing/12 and spacing/56 to fill gaps.' },
+      { area: 'Semantic/Layout', type: 'Additive', text: 'Added WEB code syntax to all 9 spacing tokens — now shows correct CSS var name in Figma inspector and Token Studio export (e.g. --spacing-m).' },
+      { area: 'Token ref site',  type: 'Additive', text: 'Compact tab now shows --spacing-m-compact naming in the CSS column, matching the flat two-variable migration approach dev needs. Copy button copies the correct compact var name.' },
+      { area: 'Token ref site',  type: 'Update',   text: 'CSS output updated — shows both --spacing-m (desktop) and --spacing-m-compact (mobile) with a commented component-level opt-in usage pattern.' },
+      { area: 'Token ref site',  type: 'Update',   text: 'Typography split into Tier 1 (live: font family + weight tokens in storefronts) and Tier 2 (v2 proposed: font-size scale). Tier 2 is badged and blocked by the heading component refactor (~1,024 refs, 366 files).' },
+      { area: 'Semantic/Mapped', type: 'Additive', text: 'Radius section now brand-aware — Adrenaline and Local Agent correctly show their sharper scale (sm: 2px, md: 4px, lg: 8px, xl: 12px, 2xl: 16px). Added missing radius/2xl token.' },
+      { area: 'Token ref site',  type: 'Update',   text: 'Radius section updated with brand switcher so devs can inspect per-brand values. CSS output now includes correct radius vars per brand.' },
+      { area: 'Token ref site',  type: 'Additive', text: 'Token mapping section added — full v1 Confluence → v2 design system comparison across colour, radius, spacing, and typography with rationale for every change.' },
+      { area: 'Token ref site',  type: 'Additive', text: 'Changelog section rebuilt — collapsible weeks, search, and type + area filters.' },
+    ]
+  },
+  // ── Add new weeks above this line ──
+];
+
+// ── CHANGELOG STATE & RENDER ────────────────────────────────────
+let clTypeFilter = 'all';
+let clAreaFilter = 'all';
+let clOpenWeeks = new Set(['0']); // first week open by default
+
+function typeBadge(type) {
+  const map = {
+    Breaking: 'color:#7a1a00;background:rgba(204,68,0,0.08);border-color:rgba(204,68,0,0.2)',
+    Additive: 'color:#1a5a00;background:rgba(26,122,26,0.08);border-color:rgba(26,122,26,0.2)',
+    Update:   'color:#004a7a;background:rgba(0,102,204,0.07);border-color:rgba(0,102,204,0.18)',
+  };
+  return `<span style="font-size:10px;font-weight:700;border:1px solid;border-radius:4px;padding:2px 7px;${map[type]||''}">${type}</span>`;
+}
+
+function renderChangelog() {
+  const q = (document.getElementById('cl-search').value || '').toLowerCase();
+  const list = document.getElementById('cl-list');
+  const empty = document.getElementById('cl-empty');
+  let anyVisible = false;
+  list.innerHTML = '';
+
+  clWeeks.forEach((week, wi) => {
+    const filtered = week.changes.filter(c => {
+      if (clTypeFilter !== 'all' && c.type !== clTypeFilter) return false;
+      if (clAreaFilter !== 'all' && c.area !== clAreaFilter) return false;
+      if (q && !c.text.toLowerCase().includes(q) && !c.area.toLowerCase().includes(q)) return false;
+      return true;
+    });
+    if (!filtered.length) return;
+    anyVisible = true;
+
+    const isOpen = clOpenWeeks.has(String(wi));
+    const breakingCount = filtered.filter(c => c.type === 'Breaking').length;
+
+    const weekEl = document.createElement('div');
+    weekEl.className = 'cl-week' + (isOpen ? ' open' : '');
+    weekEl.dataset.wi = wi;
+
+    weekEl.innerHTML = `
+      <div class="cl-week-header" onclick="toggleWeek(${wi})">
+        <div class="cl-week-title">
+          <span class="cl-week-date">${week.weekOf}</span>
+          <span class="cl-week-label">${week.label}</span>
+          ${breakingCount ? `<span style="font-size:10px;font-weight:700;color:#7a1a00;background:rgba(204,68,0,0.08);border:1px solid rgba(204,68,0,0.2);border-radius:4px;padding:1px 6px">⚠ ${breakingCount} breaking</span>` : ''}
+        </div>
+        <div class="cl-week-meta">
+          <span class="cl-count">${filtered.length} change${filtered.length !== 1 ? 's' : ''}</span>
+          <span class="cl-chevron">▼</span>
+        </div>
+      </div>
+      <div class="cl-week-body">
+        ${filtered.map(c => `
+          <div class="cl-row">
+            <div class="cl-row-area">${c.area}</div>
+            <div class="cl-row-change">${c.text}</div>
+            <div class="cl-row-type">${typeBadge(c.type)}</div>
+          </div>`).join('')}
+      </div>`;
+    list.appendChild(weekEl);
+  });
+
+  empty.style.display = anyVisible ? 'none' : 'block';
+}
+
+function toggleWeek(wi) {
+  if (clOpenWeeks.has(String(wi))) clOpenWeeks.delete(String(wi));
+  else clOpenWeeks.add(String(wi));
+  renderChangelog();
+}
+
+function expandAllWeeks() {
+  clWeeks.forEach((_, i) => clOpenWeeks.add(String(i)));
+  renderChangelog();
+}
+
+function setCLFilter(type, btn) {
+  clTypeFilter = type;
+  document.querySelectorAll('#cl-type-filters .cl-filter').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderChangelog();
+}
+
+function setCLArea(area, btn) {
+  clAreaFilter = area;
+  document.querySelectorAll('#cl-area-filters .cl-filter').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderChangelog();
+}
+
+renderChangelog();
 </script>
 </body>
 </html>
