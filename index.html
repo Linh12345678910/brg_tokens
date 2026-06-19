@@ -182,7 +182,7 @@ pre { padding: 20px; font-family: var(--mono); font-size: 12px; line-height: 1.8
 <main>
   <div class="page-header">
     <h1>BRG Design System · Token Reference</h1>
-    <p>Preview of how Figma design tokens map to CSS custom properties. Token names are proposals — confirm with dev before Token Studio setup.</p>
+    <p>Preview of how Figma design tokens map to CSS custom properties. Token names are proposals — confirm with dev before implementation.</p>
     <div class="badge-row">
       <span class="badge badge-blue">Figma → CSS</span>
       <span class="badge badge-orange">5 brands</span>
@@ -194,8 +194,8 @@ pre { padding: 20px; font-family: var(--mono); font-size: 12px; line-height: 1.8
   <div style="background:#fffbeb;border:1px solid #f0d080;border-radius:8px;padding:16px 20px;margin-bottom:40px;display:flex;gap:12px;align-items:flex-start">
     <span style="font-size:18px;flex-shrink:0">🚧</span>
     <div>
-      <div style="font-size:13px;font-weight:700;color:#7a5a00;margin-bottom:4px">WIP — Foundation skeleton in place, naming convention pending</div>
-      <div style="font-size:12px;color:#6a4a00;line-height:1.7">All token collections are structured and scoped. Next step: confirm CSS custom property naming convention with dev before Token Studio setup. Once naming is locked, component library build begins — Button → Badge/Tag → Card. Use <code style="font-family:var(--mono);font-size:11px;background:rgba(0,0,0,0.06);padding:1px 5px;border-radius:3px">Semantic/Mapped</code> for colour and radius, <code style="font-family:var(--mono);font-size:11px;background:rgba(0,0,0,0.06);padding:1px 5px;border-radius:3px">Semantic/Layout</code> for spacing and font sizes.</div>
+      <div style="font-size:13px;font-weight:700;color:#7a5a00;margin-bottom:4px">WIP — Establishing design system foundations · aligning naming with dev</div>
+      <div style="font-size:12px;color:#6a4a00;line-height:1.7">All token collections are structured and scoped in Figma. Currently aligning CSS custom property naming with dev before anything is implemented. Once naming is locked, next step is Untitled UI sign-off, then component library build. Use <code style="font-family:var(--mono);font-size:11px;background:rgba(0,0,0,0.06);padding:1px 5px;border-radius:3px">Semantic/Mapped</code> for colour and radius, <code style="font-family:var(--mono);font-size:11px;background:rgba(0,0,0,0.06);padding:1px 5px;border-radius:3px">Semantic/Layout</code> for spacing and font sizes.</div>
     </div>
   </div>
 
@@ -220,7 +220,7 @@ pre { padding: 20px; font-family: var(--mono); font-size: 12px; line-height: 1.8
       <div class="flow-step">
         <div class="flow-step-num">LAYER 3</div>
         <div class="flow-step-title">CSS export</div>
-        <div class="flow-step-desc">Token Studio reads variables → Style Dictionary outputs CSS custom properties → injected per brand via class on <code style="font-family:var(--mono);font-size:11px;color:#0055aa;background:#f0f0f2;padding:1px 5px;border-radius:3px">&lt;html&gt;</code>. Media query or <code style="font-family:var(--mono);font-size:11px;color:#0055aa;background:#f0f0f2;padding:1px 5px;border-radius:3px">.compact</code> class handles breakpoints.</div>
+        <div class="flow-step-desc">CSS custom properties are output per brand via a class on <code style="font-family:var(--mono);font-size:11px;color:#0055aa;background:#f0f0f2;padding:1px 5px;border-radius:3px">&lt;html&gt;</code>. Media query or <code style="font-family:var(--mono);font-size:11px;color:#0055aa;background:#f0f0f2;padding:1px 5px;border-radius:3px">.compact</code> class handles breakpoints. Export pipeline TBD once component library is stable.</div>
       </div>
     </div>
   </section>
@@ -445,7 +445,7 @@ pre { padding: 20px; font-family: var(--mono); font-size: 12px; line-height: 1.8
       <span class="section-num">08</span>
       <span class="section-title">CSS output preview</span>
     </div>
-    <p class="section-desc">Illustrative output from Token Studio + Style Dictionary. Final format to be agreed before implementation.</p>
+    <p class="section-desc">Illustrative CSS output showing how tokens map to custom properties per brand. For reference and dev alignment — export pipeline TBD.</p>
     <div class="brand-bar">
       <button class="brand-btn active" data-brand="adr" onclick="setCssBrand('adr', this)">Adrenaline</button>
       <button class="brand-btn" data-brand="exoz" onclick="setCssBrand('exoz', this)">ExperienceOz</button>
@@ -657,16 +657,16 @@ pre { padding: 20px; font-family: var(--mono); font-size: 12px; line-height: 1.8
       <span class="section-num">11</span>
       <span class="section-title">Next steps</span>
     </div>
-    <p class="section-desc">Roadmap to Token Studio integration.</p>
+    <p class="section-desc">What's done and what's next — in order.</p>
     <table class="token-table">
       <thead><tr><th>#</th><th>Step</th><th>Detail</th></tr></thead>
       <tbody>
         <tr><td style="padding:10px 12px;font-family:var(--mono);font-size:12px;color:#1a7a1a">&#10003;</td><td class="token-desc" style="font-weight:600;color:#1a7a1a">Foundation complete</td><td class="token-desc">All collections locked. Primitives, Semantic/Color, Radius, Typography, Spacing, Mapped, Layout all wired and scoped correctly.</td></tr>
-        <tr><td style="padding:10px 12px;font-family:var(--mono);font-size:12px;color:#0055aa">&#9654;</td><td class="token-desc" style="font-weight:600;color:var(--text)">Build component library</td><td class="token-desc">Start with Button → Badge/Tag → Card. Use Semantic/Mapped for colour + radius, Semantic/Layout for spacing + font sizes. No hardcoded values in components.</td></tr>
-        <tr><td class="token-name" style="color:var(--text-dim)">3</td><td class="token-desc" style="font-weight:600;color:var(--text)">Confirm CSS naming</td><td class="token-desc">Agree final CSS custom property naming with dev before Token Studio setup. Names in this doc are proposals.</td></tr>
-        <tr><td class="token-name" style="color:var(--text-dim)">4</td><td class="token-desc" style="font-weight:600;color:var(--text)">GitHub Pages</td><td class="token-desc">Add this file to /docs folder in storefront-common-ui repo. Settings → Pages → Deploy from /docs.</td></tr>
-        <tr><td class="token-name" style="color:var(--text-dim)">5</td><td class="token-desc" style="font-weight:600;color:var(--text)">Install Token Studio</td><td class="token-desc">After ~10 core components are built and stable. Connect Figma → GitHub → Style Dictionary → CSS.</td></tr>
-        <tr><td class="token-name" style="color:var(--text-dim)">6</td><td class="token-desc" style="font-weight:600;color:var(--text)">Phase 2 — intent aliases</td><td class="token-desc">Once scale is adopted: <code style="font-family:var(--mono);font-size:11px;color:#0055aa;background:#f0f0f2;padding:1px 5px;border-radius:3px">--space-inset: var(--spacing-m)</code>. Second pass, not blocking adoption.</td></tr>
+        <tr><td style="padding:10px 12px;font-family:var(--mono);font-size:12px;color:#1a7a1a">&#10003;</td><td class="token-desc" style="font-weight:600;color:#1a7a1a">CSS naming aligned with dev</td><td class="token-desc">Spacing scale aligned to BAI-10860. Compact suffix approach confirmed. Radius scale confirmed per brand. Typography Tier 1 (live) and Tier 2 (v2) agreed.</td></tr>
+        <tr><td style="padding:10px 12px;font-family:var(--mono);font-size:12px;color:#0055aa">&#9654;</td><td class="token-desc" style="font-weight:600;color:var(--text)">Untitled UI — get sign-off</td><td class="token-desc">David sign-off on Untitled UI Pro purchase ($129). Needed before component library build starts.</td></tr>
+        <tr><td class="token-name" style="color:var(--text-dim)">4</td><td class="token-desc" style="font-weight:600;color:var(--text)">Build component library</td><td class="token-desc">Start with Button → Badge/Tag → Card using Untitled UI as base. All components use Semantic/Mapped for colour + radius, Semantic/Layout for spacing. No hardcoded values.</td></tr>
+        <tr><td class="token-name" style="color:var(--text-dim)">5</td><td class="token-desc" style="font-weight:600;color:var(--text)">BRG Admin white label redesign</td><td class="token-desc">White label config page redesign this dev cycle. RedBalloon needs white label support by Aug/Sep. Breaking change — UAT environment needs to be locked.</td></tr>
+        <tr><td class="token-name" style="color:var(--text-dim)">6</td><td class="token-desc" style="font-weight:600;color:var(--text)">Heading component refactor</td><td class="token-desc">Unblocks Tier 2 font-size tokens. ~1,024 refs across 366 files — needs dedicated sprint, not to be attempted during Q4.</td></tr>
       </tbody>
     </table>
   </section>
@@ -970,17 +970,16 @@ renderCssOutput();
 const clWeeks = [
   {
     weekOf: 'w/c 16 Jun 2026',
-    label: 'Spacing, typography & radius foundation',
+    label: 'Spacing, typography & radius — naming alignment with dev',
     changes: [
-      { area: 'Primitives',      type: 'Breaking', text: 'Removed spacing/48 and spacing/64 — not in Jira dev scale (BAI-10860). Added spacing/12 and spacing/56 to fill gaps.' },
-      { area: 'Semantic/Layout', type: 'Additive', text: 'Added WEB code syntax to all 9 spacing tokens — now shows correct CSS var name in Figma inspector and Token Studio export (e.g. --spacing-m).' },
-      { area: 'Token ref site',  type: 'Additive', text: 'Compact tab now shows --spacing-m-compact naming in the CSS column, matching the flat two-variable migration approach dev needs. Copy button copies the correct compact var name.' },
-      { area: 'Token ref site',  type: 'Update',   text: 'CSS output updated — shows both --spacing-m (desktop) and --spacing-m-compact (mobile) with a commented component-level opt-in usage pattern.' },
-      { area: 'Token ref site',  type: 'Update',   text: 'Typography split into Tier 1 (live: font family + weight tokens in storefronts) and Tier 2 (v2 proposed: font-size scale). Tier 2 is badged and blocked by the heading component refactor (~1,024 refs, 366 files).' },
-      { area: 'Semantic/Mapped', type: 'Additive', text: 'Radius section now brand-aware — Adrenaline and Local Agent correctly show their sharper scale (sm: 2px, md: 4px, lg: 8px, xl: 12px, 2xl: 16px). Added missing radius/2xl token.' },
-      { area: 'Token ref site',  type: 'Update',   text: 'Radius section updated with brand switcher so devs can inspect per-brand values. CSS output now includes correct radius vars per brand.' },
-      { area: 'Token ref site',  type: 'Additive', text: 'Token mapping section added — full v1 Confluence → v2 design system comparison across colour, radius, spacing, and typography with rationale for every change.' },
-      { area: 'Token ref site',  type: 'Additive', text: 'Changelog section rebuilt — collapsible weeks, search, and type + area filters.' },
+      { area: 'Primitives',      type: 'Additive', text: 'Aligned spacing primitives to Jira dev scale (BAI-10860) — removed spacing/48 and spacing/64 (not in scale), added spacing/12 and spacing/56. Primitives are hidden from pickers and not yet referenced anywhere.' },
+      { area: 'Semantic/Layout', type: 'Additive', text: 'Added WEB code syntax to all 9 spacing tokens so the correct CSS var name shows in the Figma inspector at handoff. Naming convention pending final dev sign-off.' },
+      { area: 'Token ref site',  type: 'Additive', text: 'Compact tab now shows --spacing-m-compact in the CSS column to reflect the flat two-variable approach dev needs for the migration. Still in naming alignment phase — nothing implemented in storefronts yet.' },
+      { area: 'Token ref site',  type: 'Update',   text: 'CSS output preview updated to show both --spacing-m (desktop) and --spacing-m-compact (mobile) with a commented usage pattern. Reference only — for dev alignment discussions.' },
+      { area: 'Token ref site',  type: 'Update',   text: 'Typography split into Tier 1 (font family + weight — already in storefronts, naming to be aligned) and Tier 2 (font-size scale — proposed for v2, blocked by heading component refactor). Establishing the target state, not yet adopted.' },
+      { area: 'Semantic/Mapped', type: 'Additive', text: 'Added radius/2xl token. Confirmed brand-specific radius values per brand — Adrenaline and Local Agent use a sharper scale. Values established in Figma, CSS naming pending dev alignment.' },
+      { area: 'Token ref site',  type: 'Update',   text: 'Radius section updated with brand switcher showing correct per-brand values. Added token mapping section — full v1 Confluence → v2 comparison with rationale for each change, to support dev alignment discussions.' },
+      { area: 'Token ref site',  type: 'Additive', text: 'Changelog added — collapsible weeks, search, type and area filters.' },
     ]
   },
   // ── Add new weeks above this line ──
