@@ -185,7 +185,7 @@ pre { padding: 20px; font-family: var(--mono); font-size: 12px; line-height: 1.8
     <p>Preview of how Figma design tokens map to CSS custom properties. Token names are proposals — confirm with dev before implementation.</p>
     <div class="badge-row">
       <span class="badge badge-blue">Figma → CSS</span>
-      <span class="badge badge-orange">5 brands</span>
+      <span class="badge badge-orange">6 brands</span>
       <span class="badge badge-green">Expanded · Compact</span>
       <span class="badge" style="background:rgba(26,122,26,0.08);color:#1a6a1a">&#10003; Component ready</span>
     </div>
@@ -327,12 +327,14 @@ pre { padding: 20px; font-family: var(--mono); font-size: 12px; line-height: 1.8
       <button class="brand-btn" data-brand="rb" onclick="setColourBrand('rb', this)">RedBalloon</button>
       <button class="brand-btn" data-brand="la" onclick="setColourBrand('la', this)">Local Agent</button>
       <button class="brand-btn" data-brand="base" onclick="setColourBrand('base', this)">Base</button>
+      <button class="brand-btn" data-brand="brg" onclick="setColourBrand('brg', this)">BRG Admin</button>
     </div>
     <table class="token-table">
       <thead><tr>
         <th>Figma token</th>
         <th>CSS custom property</th>
         <th>Value</th>
+        <th>Use</th>
       </tr></thead>
       <tbody id="colour-tbody"></tbody>
     </table>
@@ -452,6 +454,7 @@ pre { padding: 20px; font-family: var(--mono); font-size: 12px; line-height: 1.8
       <button class="brand-btn" data-brand="rb" onclick="setCssBrand('rb', this)">RedBalloon</button>
       <button class="brand-btn" data-brand="la" onclick="setCssBrand('la', this)">Local Agent</button>
       <button class="brand-btn" data-brand="base" onclick="setCssBrand('base', this)">Base</button>
+      <button class="brand-btn" data-brand="brg" onclick="setCssBrand('brg', this)">BRG Admin</button>
     </div>
     <div class="css-block">
       <div class="css-block-header">
@@ -707,12 +710,42 @@ const fontFamilies = {
   base: { heading: 'Inter',           body: 'Inter',    display: 'Inter' },
 };
 
+// Colour token definitions — ordered by group, with usage description
+// text/inverse removed: not needed without dark mode (confirmed Smarajit call 22 Jun)
+const colourTokens = [
+  // Surface
+  { token: 'surface/page',          css: '--surface-page',          desc: 'Page background. The outermost canvas behind all content.'          },
+  { token: 'surface/card',          css: '--surface-card',          desc: 'Card and panel backgrounds. Sits on top of surface/page.'            },
+  { token: 'surface/brand',         css: '--surface-brand',         desc: 'Brand-coloured fills only — buttons, highlights, hero backgrounds. Never use for text.'  },
+  { token: 'surface/brand-dark',    css: '--surface-brand-dark',    desc: 'Darkened brand fill for button hover states and dark hero overlays.'  },
+  { token: 'surface/overlay',       css: '--surface-overlay',       desc: 'Modal and drawer backdrop scrim.'                                    },
+  // Text
+  { token: 'text/primary',          css: '--text-primary',          desc: 'Default body text, headings, labels. Highest contrast.'              },
+  { token: 'text/secondary',        css: '--text-secondary',        desc: 'Supporting copy, captions, placeholders, muted labels.'              },
+  { token: 'text/brand',            css: '--text-brand',            desc: 'Coloured text — links, price highlights, interactive labels. Must pass contrast on surface/page.' },
+  { token: 'text/on-surface-brand', css: '--text-on-surface-brand', desc: '⚠ Critical. Text placed directly on surface/brand fills. Guarantees contrast per brand — never hardcode this.' },
+  // Border
+  { token: 'border/primary',        css: '--border-primary',        desc: 'Brand-coloured borders — selected states, active inputs, focus rings.' },
+  { token: 'border/default',        css: '--border-default',        desc: 'Default UI borders — cards, dividers, unselected inputs.'            },
+  // Feedback
+  { token: 'feedback/success-bg',   css: '--feedback-success-bg',   desc: 'Background tint for success states — confirmation banners, available badges.' },
+  { token: 'feedback/success',      css: '--feedback-success',      desc: 'Text and icon colour on success-bg. Contrast guaranteed against success-bg.' },
+  { token: 'feedback/error-bg',     css: '--feedback-error-bg',     desc: 'Background tint for error states — validation errors, unavailable states.' },
+  { token: 'feedback/error',        css: '--feedback-error',        desc: 'Text and icon colour on error-bg. Contrast guaranteed against error-bg.' },
+  // State
+  { token: 'state/brand-hover',     css: '--state-brand-hover',     desc: 'Hover state for brand-coloured interactive elements — buttons, links.'  },
+  { token: 'state/focus',           css: '--state-focus',           desc: 'Focus ring colour. Applied via outline on keyboard-focusable elements.'  },
+  { token: 'state/disabled-bg',     css: '--state-disabled-bg',     desc: 'Background for disabled inputs, buttons, and controls.'               },
+  { token: 'state/disabled-text',   css: '--state-disabled-text',   desc: 'Text and icon colour on disabled elements.'                           },
+];
+
 const colours = {
-  adr:  { 'surface/page':'FFFFFF','surface/card':'FFFFFF','surface/brand':'70EDFF','surface/brand-dark':'1E1E1E','surface/overlay':'1E1E1E','text/primary':'1E1E1E','text/secondary':'6B6B6B','text/inverse':'FFFFFF','text/brand':'70EDFF','text/on-surface-brand':'1E1E1E','border/primary':'FF6F1C','border/default':'CBCBCB','feedback/success-bg':'E0F7E0','feedback/success':'2CA02C','feedback/error-bg':'FCE0E0','feedback/error':'DC322F','state/brand-hover':'4AD8F0','state/focus':'70EDFF','state/disabled-bg':'F5F5F5','state/disabled-text':'888888' },
-  exoz: { 'surface/page':'FFFFFF','surface/card':'FFFFFF','surface/brand':'FAC532','surface/brand-dark':'1A1A1A','surface/overlay':'1A1A1A','text/primary':'1A1A1A','text/secondary':'555555','text/inverse':'FFFFFF','text/brand':'1A1A1A','text/on-surface-brand':'1A1A1A','border/primary':'FAC532','border/default':'CBCBCB','feedback/success-bg':'E0F7E0','feedback/success':'2CA02C','feedback/error-bg':'FCE0E0','feedback/error':'DC322F','state/brand-hover':'D4A200','state/focus':'FAC532','state/disabled-bg':'F5F5F5','state/disabled-text':'888888' },
-  rb:   { 'surface/page':'FCF8F8','surface/card':'FFFFFF','surface/brand':'EE3124','surface/brand-dark':'401410','surface/overlay':'000000','text/primary':'262626','text/secondary':'666666','text/inverse':'FFFFFF','text/brand':'EE3124','text/on-surface-brand':'FFFFFF','border/primary':'EE3124','border/default':'CBCBCB','feedback/success-bg':'E0F7E0','feedback/success':'2CA02C','feedback/error-bg':'FCE0E0','feedback/error':'DC322F','state/brand-hover':'C42518','state/focus':'EE3124','state/disabled-bg':'F5F5F5','state/disabled-text':'888888' },
-  la:   { 'surface/page':'FFFFFF','surface/card':'FFFFFF','surface/brand':'EB3300','surface/brand-dark':'313131','surface/overlay':'313131','text/primary':'313131','text/secondary':'878787','text/inverse':'FFFFFF','text/brand':'EB3300','text/on-surface-brand':'FFFFFF','border/primary':'EB3300','border/default':'CBCBCB','feedback/success-bg':'E0F7E0','feedback/success':'2CA02C','feedback/error-bg':'FCE0E0','feedback/error':'DC322F','state/brand-hover':'C22A00','state/focus':'EB3300','state/disabled-bg':'F5F5F5','state/disabled-text':'888888' },
-  base: { 'surface/page':'FFFFFF','surface/card':'FFFFFF','surface/brand':'222226','surface/brand-dark':'111113','surface/overlay':'111111','text/primary':'111111','text/secondary':'666666','text/inverse':'FFFFFF','text/brand':'222226','text/on-surface-brand':'FFFFFF','border/primary':'222226','border/default':'CBCBCB','feedback/success-bg':'E0F7E0','feedback/success':'2CA02C','feedback/error-bg':'FCE0E0','feedback/error':'DC322F','state/brand-hover':'3A3A3F','state/focus':'222226','state/disabled-bg':'F5F5F5','state/disabled-text':'888888' },
+  adr:  { 'surface/page':'FFFFFF','surface/card':'FFFFFF','surface/brand':'70EDFF','surface/brand-dark':'1E1E1E','surface/overlay':'1E1E1E','text/primary':'1E1E1E','text/secondary':'6B6B6B','text/brand':'70EDFF','text/on-surface-brand':'1E1E1E','border/primary':'FF6F1C','border/default':'CBCBCB','feedback/success-bg':'E0F7E0','feedback/success':'2CA02C','feedback/error-bg':'FCE0E0','feedback/error':'DC322F','state/brand-hover':'4AD8F0','state/focus':'70EDFF','state/disabled-bg':'F5F5F5','state/disabled-text':'888888' },
+  exoz: { 'surface/page':'FFFFFF','surface/card':'FFFFFF','surface/brand':'FAC532','surface/brand-dark':'1A1A1A','surface/overlay':'1A1A1A','text/primary':'1A1A1A','text/secondary':'555555','text/brand':'1A1A1A','text/on-surface-brand':'1A1A1A','border/primary':'FAC532','border/default':'CBCBCB','feedback/success-bg':'E0F7E0','feedback/success':'2CA02C','feedback/error-bg':'FCE0E0','feedback/error':'DC322F','state/brand-hover':'D4A200','state/focus':'FAC532','state/disabled-bg':'F5F5F5','state/disabled-text':'888888' },
+  rb:   { 'surface/page':'FCF8F8','surface/card':'FFFFFF','surface/brand':'EE3124','surface/brand-dark':'401410','surface/overlay':'000000','text/primary':'262626','text/secondary':'666666','text/brand':'EE3124','text/on-surface-brand':'FFFFFF','border/primary':'EE3124','border/default':'CBCBCB','feedback/success-bg':'E0F7E0','feedback/success':'2CA02C','feedback/error-bg':'FCE0E0','feedback/error':'DC322F','state/brand-hover':'C42518','state/focus':'EE3124','state/disabled-bg':'F5F5F5','state/disabled-text':'888888' },
+  la:   { 'surface/page':'FFFFFF','surface/card':'FFFFFF','surface/brand':'EB3300','surface/brand-dark':'313131','surface/overlay':'313131','text/primary':'313131','text/secondary':'878787','text/brand':'EB3300','text/on-surface-brand':'FFFFFF','border/primary':'EB3300','border/default':'CBCBCB','feedback/success-bg':'E0F7E0','feedback/success':'2CA02C','feedback/error-bg':'FCE0E0','feedback/error':'DC322F','state/brand-hover':'C22A00','state/focus':'EB3300','state/disabled-bg':'F5F5F5','state/disabled-text':'888888' },
+  base: { 'surface/page':'FFFFFF','surface/card':'FFFFFF','surface/brand':'222226','surface/brand-dark':'111113','surface/overlay':'111111','text/primary':'111111','text/secondary':'666666','text/brand':'222226','text/on-surface-brand':'FFFFFF','border/primary':'222226','border/default':'CBCBCB','feedback/success-bg':'E0F7E0','feedback/success':'2CA02C','feedback/error-bg':'FCE0E0','feedback/error':'DC322F','state/brand-hover':'3A3A3F','state/focus':'222226','state/disabled-bg':'F5F5F5','state/disabled-text':'888888' },
+  brg:  { 'surface/page':'FFFFFF','surface/card':'FFFFFF','surface/brand':'222226','surface/brand-dark':'111113','surface/overlay':'111111','text/primary':'111111','text/secondary':'666666','text/brand':'222226','text/on-surface-brand':'FFFFFF','border/primary':'222226','border/default':'CBCBCB','feedback/success-bg':'E0F7E0','feedback/success':'2CA02C','feedback/error-bg':'FCE0E0','feedback/error':'DC322F','state/brand-hover':'3A3A3F','state/focus':'222226','state/disabled-bg':'F5F5F5','state/disabled-text':'888888' },
 };
 
 const radiusData = {
@@ -724,7 +757,7 @@ const radiusData = {
   'radius/full': { css: '--radius-full',  Base: 9999, Adrenaline: 9999, ExperienceOz: 9999, RedBalloon: 9999, 'Local Agent': 9999 },
   'radius/2xl':  { css: '--radius-2xl',   Base: 24,   Adrenaline: 16,   ExperienceOz: 24,   RedBalloon: 24,   'Local Agent': 16   },
 };
-const brandKeyMap = { adr: 'Adrenaline', exoz: 'ExperienceOz', rb: 'RedBalloon', la: 'Local Agent', base: 'Base' };
+const brandKeyMap = { adr: 'Adrenaline', exoz: 'ExperienceOz', rb: 'RedBalloon', la: 'Local Agent', base: 'Base', brg: 'BRG Admin' };
 let radiusBrand = 'base';
 
 let bpMode = 'expanded';
@@ -790,12 +823,21 @@ function renderTypo() {
 function renderColour() {
   const tbody = document.getElementById('colour-tbody');
   const brand = colours[colourBrand];
-  tbody.innerHTML = Object.entries(brand).map(([token, hex]) => {
-    const cssName = '--' + token.replace(/\//g, '-');
-    return `<tr>
-      <td class="token-name">${token}<button class="copy-btn" onclick="copyToken('${cssName}',this)">copy</button></td>
-      <td class="token-css">${cssName}</td>
-      <td><div class="swatch-row"><div class="swatch" style="background:#${hex}"></div><span class="swatch-hex">#${hex}</span></div></td>
+  let lastGroup = null;
+  tbody.innerHTML = colourTokens.map(({ token, css, desc }) => {
+    const hex = brand[token] || 'f0f0f2';
+    const group = token.split('/')[0];
+    let divider = '';
+    if (group !== lastGroup) {
+      lastGroup = group;
+      divider = `<tr class="section-divider"><td colspan="4">${group}</td></tr>`;
+    }
+    const textColour = parseInt(hex, 16) > 0xffffff / 2 ? '333' : 'fff';
+    return `${divider}<tr>
+      <td class="token-name">${token}<button class="copy-btn" onclick="copyToken('${css}',this)">copy</button></td>
+      <td class="token-css">${css}</td>
+      <td><div class="swatch-row"><div class="swatch" style="background:#${hex};border-color:rgba(0,0,0,0.08)"></div><span class="swatch-hex">#${hex}</span></div></td>
+      <td class="token-desc">${desc}</td>
     </tr>`;
   }).join('');
 }
@@ -841,7 +883,7 @@ function renderCssOutput() {
   const brand = cssBrand;
   const c = colours[brand];
   const ff = fontFamilies[brand];
-  const brandClass = {adr:'brand-adrenaline',exoz:'brand-experienceoz',rb:'brand-redballoon',la:'brand-localagent',base:'brand-base'}[brand];
+  const brandClass = {adr:'brand-adrenaline',exoz:'brand-experienceoz',rb:'brand-redballoon',la:'brand-localagent',base:'brand-base',brg:'brand-brg-admin'}[brand];
   document.getElementById('css-label').textContent = `${brandClass}.css`;
   const lines = [
     `<span class="cmt">/* ─── BRG Design System · ${brandClass} ─── */</span>`,
@@ -968,6 +1010,15 @@ renderCssOutput();
 // To add a new week: push a new object to clWeeks (most recent first)
 // Each change: { area, type: 'Breaking'|'Additive'|'Update', text }
 const clWeeks = [
+  {
+    weekOf: 'w/c 23 Jun 2026',
+    label: 'Colour tokens — text/inverse removed, usage descriptions added',
+    changes: [
+      { area: 'Semantic/Mapped', type: 'Additive', text: 'Added BRG Admin brand mode to Semantic/Mapped — all 107 variables copied from Base. BRG Admin uses Base values as its starting point and can be customised independently from here.' },
+      { area: 'Token ref site',  type: 'Additive', text: 'BRG Admin added to colour and CSS output brand switchers on the token reference site.' },
+      { area: 'Token ref site',  type: 'Update',   text: 'Colour section now shows a Use column with a plain-English description of how each token should be used — what it\'s for, what not to put it on. Tokens grouped by surface / text / border / feedback / state.' },
+    ]
+  },
   {
     weekOf: 'w/c 16 Jun 2026',
     label: 'Spacing, typography & radius — naming alignment with dev',
