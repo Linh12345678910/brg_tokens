@@ -488,18 +488,18 @@ pre { padding: 20px; font-family: var(--mono); font-size: 12px; line-height: 1.8
     </div>
 
     <!-- Legend -->
-    <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:16px;padding:10px 14px;background:var(--surface);border:1px solid var(--border);border-radius:8px;align-items:center">
-      <span style="font-size:10px;font-weight:700;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.8px">Legend</span>
-      <div style="display:flex;align-items:center;gap:6px">
-        <span style="font-size:10px;font-weight:700;color:#7a1a00;background:rgba(204,68,0,0.08);border:1px solid rgba(204,68,0,0.2);border-radius:4px;padding:2px 7px">Breaking</span>
+    <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px;padding:12px 14px;background:var(--surface);border:1px solid var(--border);border-radius:8px">
+      <span style="font-size:10px;font-weight:700;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:2px">Legend</span>
+      <div style="display:flex;align-items:baseline;gap:10px">
+        <span style="font-size:10px;font-weight:700;color:#7a1a00;background:rgba(204,68,0,0.08);border:1px solid rgba(204,68,0,0.2);border-radius:4px;padding:2px 7px;white-space:nowrap;flex-shrink:0">Breaking</span>
         <span style="font-size:12px;color:var(--text-muted)">Removes or renames something — existing designs or code may need updating</span>
       </div>
-      <div style="display:flex;align-items:center;gap:6px">
-        <span style="font-size:10px;font-weight:700;color:#1a5a00;background:rgba(26,122,26,0.08);border:1px solid rgba(26,122,26,0.2);border-radius:4px;padding:2px 7px">Additive</span>
+      <div style="display:flex;align-items:baseline;gap:10px">
+        <span style="font-size:10px;font-weight:700;color:#1a5a00;background:rgba(26,122,26,0.08);border:1px solid rgba(26,122,26,0.2);border-radius:4px;padding:2px 7px;white-space:nowrap;flex-shrink:0">Additive</span>
         <span style="font-size:12px;color:var(--text-muted)">New token or feature added — nothing breaks, safe to adopt</span>
       </div>
-      <div style="display:flex;align-items:center;gap:6px">
-        <span style="font-size:10px;font-weight:700;color:#004a7a;background:rgba(0,102,204,0.07);border:1px solid rgba(0,102,204,0.18);border-radius:4px;padding:2px 7px">Update</span>
+      <div style="display:flex;align-items:baseline;gap:10px">
+        <span style="font-size:10px;font-weight:700;color:#004a7a;background:rgba(0,102,204,0.07);border:1px solid rgba(0,102,204,0.18);border-radius:4px;padding:2px 7px;white-space:nowrap;flex-shrink:0">Update</span>
         <span style="font-size:12px;color:var(--text-muted)">Existing value or documentation corrected — check if anything references it</span>
       </div>
     </div>
