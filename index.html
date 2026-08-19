@@ -369,18 +369,21 @@ pre { padding: 20px; font-family: var(--mono); font-size: 12px; line-height: 1.8
     </div>
     <p class="section-desc">Semantic/Mapped · shared across all brands · used for nav, cards, modals and tooltips.</p>
     <div class="shadow-preview">
-      <div class="shadow-item"><div class="shadow-box" style="box-shadow:0 8px 12px -4px rgba(0,0,0,0.5)"></div><div class="shadow-name">shadow/nav</div></div>
-      <div class="shadow-item"><div class="shadow-box" style="box-shadow:0 8px 8px -4px rgba(0,0,0,0.5)"></div><div class="shadow-name">shadow/card</div></div>
-      <div class="shadow-item"><div class="shadow-box" style="box-shadow:0 8px 24px rgba(0,0,0,0.5)"></div><div class="shadow-name">shadow/modal</div></div>
-      <div class="shadow-item"><div class="shadow-box" style="box-shadow:0 2px 8px rgba(99,99,99,0.6)"></div><div class="shadow-name">shadow/tooltip</div></div>
+      <div class="shadow-item"><div class="shadow-box" style="box-shadow:0 8px 12px -4px rgba(0,0,0,0.08)"></div><div class="shadow-name">shadow/nav</div></div>
+      <div class="shadow-item"><div class="shadow-box" style="box-shadow:0 8px 8px -4px rgba(0,0,0,0.08)"></div><div class="shadow-name">shadow/card</div></div>
+      <div class="shadow-item"><div class="shadow-box" style="box-shadow:0 8px 24px rgba(0,0,0,0.08)"></div><div class="shadow-name">shadow/modal</div></div>
+      <div class="shadow-item"><div class="shadow-box" style="box-shadow:0 2px 8px rgba(99,99,99,0.20)"></div><div class="shadow-name">shadow/tooltip</div></div>
+    </div>
+    <div class="impl-note" style="margin-top:16px;background:#fffbeb;border-color:#f0d080;color:#6a4a00">
+      <strong style="color:#7a5a00">Not variable-bound</strong> — Figma does not support binding drop shadow geometry (x, y, blur, spread) to variable tokens. Shadows are applied as native Figma effects. Use <code style="font-family:var(--mono);font-size:11px">--shadow-default</code> from the CSS contract as the code reference. Shadow colour is controlled via the <code style="font-family:var(--mono);font-size:11px">Colors/Effects/Shadows/*</code> variables in the UI Component Library.
     </div>
     <table class="token-table" style="margin-top:16px">
-      <thead><tr><th>Figma token</th><th>CSS custom property</th><th>Value</th><th>Use</th></tr></thead>
+      <thead><tr><th>Name</th><th>CSS value</th><th>Use</th></tr></thead>
       <tbody>
-        <tr><td class="token-name">shadow/nav<button class="copy-btn" onclick="copyToken('--shadow-nav',this)">copy</button></td><td class="token-css">--shadow-nav</td><td class="token-val" style="font-size:11px">0 8px 12px -4px rgba(0,0,0,0.08)</td><td class="token-desc">Navbar, sticky headers</td></tr>
-        <tr><td class="token-name">shadow/card<button class="copy-btn" onclick="copyToken('--shadow-card',this)">copy</button></td><td class="token-css">--shadow-card</td><td class="token-val" style="font-size:11px">0 8px 8px -4px rgba(0,0,0,0.08)</td><td class="token-desc">Product cards, booking widgets</td></tr>
-        <tr><td class="token-name">shadow/modal<button class="copy-btn" onclick="copyToken('--shadow-modal',this)">copy</button></td><td class="token-css">--shadow-modal</td><td class="token-val" style="font-size:11px">0 8px 24px rgba(0,0,0,0.08)</td><td class="token-desc">Modals, drawers, overlays</td></tr>
-        <tr><td class="token-name">shadow/tooltip<button class="copy-btn" onclick="copyToken('--shadow-tooltip',this)">copy</button></td><td class="token-css">--shadow-tooltip</td><td class="token-val" style="font-size:11px">0 2px 8px rgba(99,99,99,0.20)</td><td class="token-desc">Tooltips, popovers</td></tr>
+        <tr><td class="token-name">shadow/nav</td><td class="token-val" style="font-size:11px">0 8px 12px -4px rgba(0,0,0,0.08)</td><td class="token-desc">Navbar, sticky headers</td></tr>
+        <tr><td class="token-name">shadow/card</td><td class="token-val" style="font-size:11px">0 8px 8px -4px rgba(0,0,0,0.08)</td><td class="token-desc">Product cards, booking widgets</td></tr>
+        <tr><td class="token-name">shadow/modal</td><td class="token-val" style="font-size:11px">0 8px 24px rgba(0,0,0,0.08)</td><td class="token-desc">Modals, drawers, overlays</td></tr>
+        <tr><td class="token-name">shadow/tooltip</td><td class="token-val" style="font-size:11px">0 2px 8px rgba(99,99,99,0.20)</td><td class="token-desc">Tooltips, popovers</td></tr>
       </tbody>
     </table>
   </section>
@@ -689,16 +692,14 @@ const spacing = [
 const fontSizes = [
   { token: 'font-size/title',   css: '--font-size-title',   exp: 96, com: 56, sample: 'Display' },
   { token: 'font-size/h1',      css: '--font-size-h1',      exp: 64, com: 40, sample: 'Heading 1' },
-  { token: 'font-size/h2',      css: '--font-size-h2',      exp: 48, com: 28, sample: 'Heading 2' },
+  { token: 'font-size/h2',      css: '--font-size-h2',      exp: 48, com: 32, sample: 'Heading 2' },
   { token: 'font-size/h3',      css: '--font-size-h3',      exp: 32, com: 24, sample: 'Heading 3' },
   { token: 'font-size/h4',      css: '--font-size-h4',      exp: 24, com: 20, sample: 'Heading 4' },
   { token: 'font-size/h5',      css: '--font-size-h5',      exp: 20, com: 18, sample: 'Heading 5' },
   { token: 'font-size/body-lg', css: '--font-size-body-lg', exp: 18, com: 16, sample: 'Body large — lorem ipsum dolor' },
-  { token: 'font-size/body',    css: '--font-size-body',    exp: 16, com: 16, sample: 'Body — lorem ipsum dolor sit amet' },
-  { token: 'font-size/body-sm', css: '--font-size-body-sm', exp: 14, com: 14, sample: 'Body small — lorem ipsum dolor sit' },
-  { token: 'font-size/button',  css: '--font-size-button',  exp: 16, com: 14, sample: 'Button label' },
-  { token: 'font-size/label',   css: '--font-size-label',   exp: 12, com: 12, sample: 'Label / tag' },
-  { token: 'font-size/caption', css: '--font-size-caption', exp: 12, com: 12, sample: 'Caption — all the fine print' },
+  { token: 'font-size/body',    css: '--font-size-body',    exp: 16, com: 15, sample: 'Body — lorem ipsum dolor sit amet' },
+  { token: 'font-size/body-sm', css: '--font-size-body-sm', exp: 14, com: 13, sample: 'Body small — lorem ipsum dolor sit' },
+  { token: 'font-size/caption', css: '--font-size-caption', exp: 12, com: 11, sample: 'Caption — all the fine print' },
 ];
 
 const fontFamilies = {
@@ -710,11 +711,12 @@ const fontFamilies = {
 };
 
 const colours = {
-  adr:  { 'surface/page':'FFFFFF','surface/card':'FFFFFF','surface/brand':'70EDFF','surface/brand-dark':'1E1E1E','surface/overlay':'1E1E1E','text/primary':'1E1E1E','text/secondary':'6B6B6B','text/inverse':'FFFFFF','text/brand':'70EDFF','text/on-surface-brand':'1E1E1E','border/primary':'FF6F1C','border/default':'CBCBCB','feedback/success-bg':'E0F7E0','feedback/success':'2CA02C','feedback/error-bg':'FCE0E0','feedback/error':'DC322F','state/brand-hover':'4AD8F0','state/focus':'70EDFF','state/disabled-bg':'F5F5F5','state/disabled-text':'888888' },
-  exoz: { 'surface/page':'FFFFFF','surface/card':'FFFFFF','surface/brand':'FAC532','surface/brand-dark':'1A1A1A','surface/overlay':'1A1A1A','text/primary':'1A1A1A','text/secondary':'555555','text/inverse':'FFFFFF','text/brand':'1A1A1A','text/on-surface-brand':'1A1A1A','border/primary':'FAC532','border/default':'CBCBCB','feedback/success-bg':'E0F7E0','feedback/success':'2CA02C','feedback/error-bg':'FCE0E0','feedback/error':'DC322F','state/brand-hover':'D4A200','state/focus':'FAC532','state/disabled-bg':'F5F5F5','state/disabled-text':'888888' },
-  rb:   { 'surface/page':'FCF8F8','surface/card':'FFFFFF','surface/brand':'EE3124','surface/brand-dark':'401410','surface/overlay':'000000','text/primary':'262626','text/secondary':'666666','text/inverse':'FFFFFF','text/brand':'EE3124','text/on-surface-brand':'FFFFFF','border/primary':'EE3124','border/default':'CBCBCB','feedback/success-bg':'E0F7E0','feedback/success':'2CA02C','feedback/error-bg':'FCE0E0','feedback/error':'DC322F','state/brand-hover':'C42518','state/focus':'EE3124','state/disabled-bg':'F5F5F5','state/disabled-text':'888888' },
-  la:   { 'surface/page':'FFFFFF','surface/card':'FFFFFF','surface/brand':'EB3300','surface/brand-dark':'313131','surface/overlay':'313131','text/primary':'313131','text/secondary':'878787','text/inverse':'FFFFFF','text/brand':'EB3300','text/on-surface-brand':'FFFFFF','border/primary':'EB3300','border/default':'CBCBCB','feedback/success-bg':'E0F7E0','feedback/success':'2CA02C','feedback/error-bg':'FCE0E0','feedback/error':'DC322F','state/brand-hover':'C22A00','state/focus':'EB3300','state/disabled-bg':'F5F5F5','state/disabled-text':'888888' },
-  base: { 'surface/page':'FFFFFF','surface/card':'FFFFFF','surface/brand':'222226','surface/brand-dark':'111113','surface/overlay':'111111','text/primary':'111111','text/secondary':'666666','text/inverse':'FFFFFF','text/brand':'222226','text/on-surface-brand':'FFFFFF','border/primary':'222226','border/default':'CBCBCB','feedback/success-bg':'E0F7E0','feedback/success':'2CA02C','feedback/error-bg':'FCE0E0','feedback/error':'DC322F','state/brand-hover':'3A3A3F','state/focus':'222226','state/disabled-bg':'F5F5F5','state/disabled-text':'888888' },
+  adr:  { 'surface/page':'FFFFFF','surface/card':'FFFFFF','surface/brand':'70EDFF','surface/brand-light':'E6FAFE','surface/brand-dark':'1E1E1E','surface/primary':'FF6F1C','surface/primary-light':'FFA977','surface/overlay':'1E1E1E','surface/overlay-light':'00000080','text/primary':'1E1E1E','text/secondary':'6B6B6B','text/brand':'70EDFF','text/on-surface-brand':'1E1E1E','border/primary':'FF6F1C','border/default':'CBCBCB','feedback/success-bg':'E0F7E0','feedback/success':'2CA02C','feedback/error-bg':'FCE0E0','feedback/error':'DC322F','state/brand-hover':'4AD8F0','state/focus':'70EDFF','state/disabled-bg':'F5F5F5','state/disabled-text':'888888' },
+  exoz: { 'surface/page':'FFFFFF','surface/card':'FFFFFF','surface/brand':'FAC532','surface/brand-light':'FEF9E6','surface/brand-dark':'1A1A1A','surface/primary':'FAC532','surface/primary-light':'FEF9E6','surface/overlay':'1A1A1A','surface/overlay-light':'00000080','text/primary':'1A1A1A','text/secondary':'555555','text/brand':'1A1A1A','text/on-surface-brand':'1A1A1A','border/primary':'FAC532','border/default':'CBCBCB','feedback/success-bg':'E0F7E0','feedback/success':'2CA02C','feedback/error-bg':'FCE0E0','feedback/error':'DC322F','state/brand-hover':'D4A200','state/focus':'FAC532','state/disabled-bg':'F5F5F5','state/disabled-text':'888888' },
+  rb:   { 'surface/page':'FCF8F8','surface/card':'FFFFFF','surface/brand':'EE3124','surface/brand-light':'FFD2E5','surface/brand-dark':'401410','surface/primary':'EE3124','surface/primary-light':'FFD2E5','surface/overlay':'000000','surface/overlay-light':'00000080','text/primary':'262626','text/secondary':'666666','text/brand':'EE3124','text/on-surface-brand':'FFFFFF','border/primary':'EE3124','border/default':'CBCBCB','feedback/success-bg':'E0F7E0','feedback/success':'2CA02C','feedback/error-bg':'FCE0E0','feedback/error':'DC322F','state/brand-hover':'C42518','state/focus':'EE3124','state/disabled-bg':'F5F5F5','state/disabled-text':'888888' },
+  la:   { 'surface/page':'FFFFFF','surface/card':'FFFFFF','surface/brand':'EB3300','surface/brand-light':'FDD4C7','surface/brand-dark':'313131','surface/primary':'EB3300','surface/primary-light':'FAFAFA','surface/overlay':'313131','surface/overlay-light':'00000080','text/primary':'313131','text/secondary':'878787','text/brand':'EB3300','text/on-surface-brand':'FFFFFF','border/primary':'EB3300','border/default':'CBCBCB','feedback/success-bg':'E0F7E0','feedback/success':'2CA02C','feedback/error-bg':'FCE0E0','feedback/error':'DC322F','state/brand-hover':'C22A00','state/focus':'EB3300','state/disabled-bg':'F5F5F5','state/disabled-text':'888888' },
+  base: { 'surface/page':'FFFFFF','surface/card':'FFFFFF','surface/brand':'222226','surface/brand-light':'EBEBEC','surface/brand-dark':'111113','surface/primary':'222226','surface/primary-light':'EEEEEF','surface/overlay':'111111','surface/overlay-light':'00000080','text/primary':'111111','text/secondary':'666666','text/brand':'222226','text/on-surface-brand':'FFFFFF','border/primary':'222226','border/default':'CBCBCB','feedback/success-bg':'E0F7E0','feedback/success':'2CA02C','feedback/error-bg':'FCE0E0','feedback/error':'DC322F','state/brand-hover':'3A3A3F','state/focus':'222226','state/disabled-bg':'F5F5F5','state/disabled-text':'888888' },
+  brg:  { 'surface/page':'FFFFFF','surface/card':'FFFFFF','surface/brand':'222226','surface/brand-light':'EBEBEC','surface/brand-dark':'111113','surface/primary':'222226','surface/primary-light':'EEEEEF','surface/overlay':'111111','surface/overlay-light':'00000080','text/primary':'111111','text/secondary':'666666','text/brand':'222226','text/on-surface-brand':'FFFFFF','border/primary':'222226','border/default':'CBCBCB','feedback/success-bg':'E0F7E0','feedback/success':'2CA02C','feedback/error-bg':'FCE0E0','feedback/error':'DC322F','state/brand-hover':'3A3A3F','state/focus':'222226','state/disabled-bg':'F5F5F5','state/disabled-text':'888888' },
 };
 
 const radiusData = {
@@ -971,15 +973,29 @@ renderCssOutput();
 // Each change: { area, type: 'Breaking'|'Additive'|'Update', text }
 const clWeeks = [
   {
+    weekOf: 'w/c 18 Aug 2026',
+    label: 'Surface tokens — primary, primary-light, overlay-light corrected and added',
+    changes: [
+      { area: 'Semantic/Mapped', type: 'Update',   text: 'surface/primary Adrenaline corrected: was pointing to colour/adr/blue (#70edff — the brand accent) instead of colour/adr/orange (#ff6f1c — the actual primary action colour used on buttons and CTAs).' },
+      { area: 'Semantic/Mapped', type: 'Update',   text: 'surface/primary-light Adrenaline corrected: was pointing to colour/adr/blue-deep (#0eafc7 — too dark) now points to colour/adr/orange-soft (#ffa977 — correct light tint of primary).' },
+      { area: 'Primitives',      type: 'Additive', text: 'Added colour/adr/cyan-light (#e6fafe) — light tint of Adrenaline cyan, for surface/brand-light.' },
+      { area: 'Primitives',      type: 'Update',   text: 'Renamed colour/exoz/blue → colour/exoz/yellow-light, updated value from #c5e6ff (incorrect blue) to #fef9e6 (correct light yellow tint from ExOz yellow #fac532).' },
+      { area: 'Primitives',      type: 'Additive', text: 'Added colour/black-50 — black at 50% opacity.' },
+      { area: 'Semantic/Mapped', type: 'Additive', text: 'Added surface/overlay-light → colour/black-50 (rgba 0,0,0,0.5). For image overlays, hover scrims, semi-transparent backdrops. Distinct from surface/overlay which is fully opaque.' },
+      { area: 'Token ref site',  type: 'Update',   text: 'Colour section updated — new surface tokens added (surface/primary, surface/primary-light, surface/brand-light, surface/overlay-light) with correct per-brand values and usage descriptions.' },
+      { area: 'Token ref site',  type: 'Update',   text: 'Shadows section updated — shadow variable tokens removed from Figma (shadow geometry cannot be bound to variables). Documented as native Figma effects with CSS reference values and annotation guidance.' },
+    ]
+  },
+  {
     weekOf: 'w/c 23 Jun 2026',
     label: 'Font-size corrections, colour tokens, BRG Admin brand mode',
     changes: [
       { area: 'Semantic/Layout', type: 'Breaking', text: 'font-size/button corrected: Expanded 18px → 16px, Compact 16px → 14px. Button text was larger than body text — now aligns with body on desktop and body-sm on mobile.' },
       { area: 'Semantic/Layout', type: 'Breaking', text: 'font-size/body-lg Compact corrected: 20px → 16px. Was incorrectly larger than its Expanded value (18px) — now steps down correctly on mobile.' },
-      { area: 'Token ref site',  type: 'Additive', text: 'Added font-size/button (16px/14px) and font-size/label (12px/12px) to the typography Tier 2 table — were missing from the site despite existing in Figma.' },
+      { area: 'Token ref site',  type: 'Additive', text: 'Added font-size/button (16px/14px) and font-size/label (12px/12px) to the typography Tier 2 table.' },
       { area: 'Semantic/Mapped', type: 'Breaking', text: 'Removed text/inverse from all brand modes — not needed without dark mode. Confirmed with Smarajit 22 Jun.' },
-      { area: 'Semantic/Mapped', type: 'Additive', text: 'Added BRG Admin brand mode to Semantic/Mapped — all 107 variables copied from Base. Starting point for Admin-specific theming, can be customised independently.' },
-      { area: 'Token ref site',  type: 'Update',   text: 'Colour section now shows a Use column with plain-English descriptions. Tokens grouped by surface / text / border / feedback / state with section dividers.' },
+      { area: 'Semantic/Mapped', type: 'Additive', text: 'Added BRG Admin brand mode — all 107 variables copied from Base. Starting point for Admin-specific theming.' },
+      { area: 'Token ref site',  type: 'Update',   text: 'Colour section now shows a Use column with plain-English descriptions. Tokens grouped by surface / text / border / feedback / state.' },
       { area: 'Token ref site',  type: 'Additive', text: 'BRG Admin added to colour section and CSS output brand switchers.' },
     ]
   },
