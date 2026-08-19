@@ -190,13 +190,7 @@ pre { padding: 20px; font-family: var(--mono); font-size: 12px; line-height: 1.8
     </div>
   </div>
 
-  <div style="background:#fffbeb;border:1px solid #f0d080;border-radius:8px;padding:16px 20px;margin-bottom:40px;display:flex;gap:12px;align-items:flex-start">
-    <span style="font-size:18px;flex-shrink:0">🚧</span>
-    <div>
-      <div style="font-size:13px;font-weight:700;color:#7a5a00;margin-bottom:4px">WIP — Establishing design system foundations · aligning naming with dev</div>
-      <div style="font-size:12px;color:#6a4a00;line-height:1.7">All token collections are structured and scoped in Figma. Currently aligning CSS custom property naming with dev before anything is implemented. Once naming is locked, next step is Untitled UI sign-off, then component library build. Use <code style="font-family:var(--mono);font-size:11px;background:rgba(0,0,0,0.06);padding:1px 5px;border-radius:3px">Semantic/Mapped</code> for colour and radius, <code style="font-family:var(--mono);font-size:11px;background:rgba(0,0,0,0.06);padding:1px 5px;border-radius:3px">Semantic/Layout</code> for spacing and font sizes.</div>
-    </div>
-  </div>
+  <div class="section" style="margin-bottom:0;padding-bottom:0"></div>
 
   <!-- HOW IT WORKS -->
   <section id="how-it-works" class="section">
@@ -289,11 +283,11 @@ pre { padding: 20px; font-family: var(--mono); font-size: 12px; line-height: 1.8
     <!-- TIER 2: V2 PROPOSED -->
     <div>
       <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
-        <span style="font-size:11px;font-weight:700;color:#7a5a00;text-transform:uppercase;letter-spacing:0.8px">Tier 2 — v2 Proposed</span>
-        <span style="font-size:11px;color:var(--text-muted)">Requires heading component refactor · ~1,024 refs across 366 files</span>
+        <span style="font-size:11px;font-weight:700;color:#7a5a00;text-transform:uppercase;letter-spacing:0.8px">Tier 2 — v2 target state</span>
+        <span style="font-size:11px;color:var(--text-muted)">Used to build widgets · heading component refactor needed in v2</span>
       </div>
       <div class="impl-note" style="background:#fffbeb;border-color:#f0d080;color:#6a4a00;margin-bottom:14px">
-        <strong style="color:#7a5a00">Why these don't exist yet:</strong> Font sizes are currently controlled by the <code style="font-family:var(--mono);font-size:11px">HEADING_TYPOGRAPHY</code> constant in TypeScript and baked into the shared heading component — not CSS variables. These tokens define the <em>target state</em> for when the heading component is refactored in v2. Do not implement until that refactor is scoped and ticketed.
+        <strong style="color:#7a5a00">Current state:</strong> These font-size tokens are used in widget design and as the design target. In code, font sizes are currently controlled by the <code style="font-family:var(--mono);font-size:11px">HEADING_TYPOGRAPHY</code> TypeScript constant baked into the shared heading component (~1,024 refs, 366 files). A heading component refactor is needed in v2 to adopt these as CSS variables — <strong style="color:#7a5a00">this refactor is not yet scoped or ticketed</strong> and should be raised with dev before the v2 migration is planned.
       </div>
 
       <div class="bp-toggle" style="margin-bottom:12px">
@@ -350,6 +344,7 @@ pre { padding: 20px; font-family: var(--mono); font-size: 12px; line-height: 1.8
       <button class="brand-btn" data-brand="exoz" onclick="setRadiusBrand('exoz', this)">ExperienceOz</button>
       <button class="brand-btn" data-brand="rb" onclick="setRadiusBrand('rb', this)">RedBalloon</button>
       <button class="brand-btn" data-brand="la" onclick="setRadiusBrand('la', this)">Local Agent</button>
+      <button class="brand-btn" data-brand="brg" onclick="setRadiusBrand('brg', this)">BRG Admin</button>
     </div>
     <div class="radius-grid" id="radius-grid"></div>
     <div style="margin-top:24px">
@@ -490,6 +485,23 @@ pre { padding: 20px; font-family: var(--mono); font-size: 12px; line-height: 1.8
         <button class="cl-filter cl-area" data-area="Token ref site" onclick="setCLArea('Token ref site',this)">Token ref site</button>
       </div>
       <button onclick="expandAllWeeks()" style="margin-left:auto;background:none;border:1px solid var(--border);border-radius:6px;padding:5px 12px;font-size:11px;color:var(--text-muted);cursor:pointer;font-family:var(--sans)">Expand all</button>
+    </div>
+
+    <!-- Legend -->
+    <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:16px;padding:10px 14px;background:var(--surface);border:1px solid var(--border);border-radius:8px;align-items:center">
+      <span style="font-size:10px;font-weight:700;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.8px">Legend</span>
+      <div style="display:flex;align-items:center;gap:6px">
+        <span style="font-size:10px;font-weight:700;color:#7a1a00;background:rgba(204,68,0,0.08);border:1px solid rgba(204,68,0,0.2);border-radius:4px;padding:2px 7px">Breaking</span>
+        <span style="font-size:12px;color:var(--text-muted)">Removes or renames something — existing designs or code may need updating</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px">
+        <span style="font-size:10px;font-weight:700;color:#1a5a00;background:rgba(26,122,26,0.08);border:1px solid rgba(26,122,26,0.2);border-radius:4px;padding:2px 7px">Additive</span>
+        <span style="font-size:12px;color:var(--text-muted)">New token or feature added — nothing breaks, safe to adopt</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px">
+        <span style="font-size:10px;font-weight:700;color:#004a7a;background:rgba(0,102,204,0.07);border:1px solid rgba(0,102,204,0.18);border-radius:4px;padding:2px 7px">Update</span>
+        <span style="font-size:12px;color:var(--text-muted)">Existing value or documentation corrected — check if anything references it</span>
+      </div>
     </div>
 
     <div id="cl-empty" style="display:none;padding:24px;text-align:center;color:var(--text-muted);font-size:13px;border:1px dashed var(--border);border-radius:8px">No changes match your filters.</div>
@@ -699,15 +711,15 @@ const colours = {
 };
 
 const radiusData = {
-  'radius/none': { css: '--radius-none',  Base: 0,    Adrenaline: 0,    ExperienceOz: 0,    RedBalloon: 0,    'Local Agent': 0    },
-  'radius/sm':   { css: '--radius-sm',    Base: 4,    Adrenaline: 2,    ExperienceOz: 4,    RedBalloon: 4,    'Local Agent': 4    },
-  'radius/md':   { css: '--radius-md',    Base: 8,    Adrenaline: 4,    ExperienceOz: 8,    RedBalloon: 8,    'Local Agent': 4    },
-  'radius/lg':   { css: '--radius-lg',    Base: 12,   Adrenaline: 8,    ExperienceOz: 12,   RedBalloon: 12,   'Local Agent': 8    },
-  'radius/xl':   { css: '--radius-xl',    Base: 16,   Adrenaline: 12,   ExperienceOz: 16,   RedBalloon: 16,   'Local Agent': 12   },
-  'radius/full': { css: '--radius-full',  Base: 9999, Adrenaline: 9999, ExperienceOz: 9999, RedBalloon: 9999, 'Local Agent': 9999 },
-  'radius/2xl':  { css: '--radius-2xl',   Base: 24,   Adrenaline: 16,   ExperienceOz: 24,   RedBalloon: 24,   'Local Agent': 16   },
+  'radius/none': { css: '--radius-none',  Base: 0,    Adrenaline: 0,    ExperienceOz: 0,    RedBalloon: 0,    'Local Agent': 0,    'BRG Admin': 0    },
+  'radius/sm':   { css: '--radius-sm',    Base: 4,    Adrenaline: 2,    ExperienceOz: 4,    RedBalloon: 4,    'Local Agent': 4,    'BRG Admin': 4    },
+  'radius/md':   { css: '--radius-md',    Base: 8,    Adrenaline: 4,    ExperienceOz: 8,    RedBalloon: 8,    'Local Agent': 4,    'BRG Admin': 8    },
+  'radius/lg':   { css: '--radius-lg',    Base: 12,   Adrenaline: 8,    ExperienceOz: 12,   RedBalloon: 12,   'Local Agent': 8,    'BRG Admin': 12   },
+  'radius/xl':   { css: '--radius-xl',    Base: 16,   Adrenaline: 12,   ExperienceOz: 16,   RedBalloon: 16,   'Local Agent': 12,   'BRG Admin': 16   },
+  'radius/2xl':  { css: '--radius-2xl',   Base: 24,   Adrenaline: 16,   ExperienceOz: 24,   RedBalloon: 24,   'Local Agent': 16,   'BRG Admin': 24   },
+  'radius/full': { css: '--radius-full',  Base: 9999, Adrenaline: 9999, ExperienceOz: 9999, RedBalloon: 9999, 'Local Agent': 9999, 'BRG Admin': 9999 },
 };
-const brandKeyMap = { adr: 'Adrenaline', exoz: 'ExperienceOz', rb: 'RedBalloon', la: 'Local Agent', base: 'Base' };
+const brandKeyMap = { adr: 'Adrenaline', exoz: 'ExperienceOz', rb: 'RedBalloon', la: 'Local Agent', base: 'Base', brg: 'BRG Admin' };
 let radiusBrand = 'base';
 
 let bpMode = 'expanded';
